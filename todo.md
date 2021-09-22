@@ -9,3 +9,4 @@
     - Hire Me
 - Scoreboard
     - Unmount Input Name on Submit
+    - BG color of title row

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 
 import Loading from './Loading';
-import { HighScoreDiv, Name, TotalScore, ScoreDate } from './styles/ScoreBoard.style';
+import { HighScoreTitleDiv, HighScoreDiv, Name, TotalScore, ScoreDate } from './styles/ScoreBoard.style';
 
 import { gql } from '../utils/gql';
 
@@ -26,11 +26,11 @@ const Scoreboard = () => {
 
     return (
         <>
-            <HighScoreDiv>
+            <HighScoreTitleDiv>
                 <Name>Name</Name>
                 <TotalScore>Total Score</TotalScore>
                 <ScoreDate>Date</ScoreDate>
-            </HighScoreDiv>
+            </HighScoreTitleDiv>
             {
                 highScores?.map(score => (
                     <HighScoreDiv key={score.id}>

@@ -15,6 +15,16 @@ export const HighScoreDiv = styled.div`
     }
 `;
 
+export const HighScoreTitleDiv = styled.div`
+    display: flex;
+    justify-content: space-between;
+    font-family: ${font};
+    margin: 0;
+    padding: 0.5em;
+    background-color: white;
+    text-align: center;
+`;
+
 export const Name = styled.span`
     display: flex;
     justify-content: flex-start;

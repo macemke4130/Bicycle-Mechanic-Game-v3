@@ -1,13 +1,10 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { useHistory } from 'react-router-dom'
 
 import { gql } from '../utils/gql';
 
 const InputHighScore = (props) => {
     const [highScoreName, setHighScoreName] = useState("");
-
-    const history = useHistory();
 
     const handleName = (e) => {
         setHighScoreName(e.target.value);

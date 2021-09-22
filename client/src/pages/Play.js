@@ -172,7 +172,7 @@ const Play = () => {
 
     const refeshHighScore = () => {
         // Refreshes the scoreboard component when user enters their name --
-        
+        setInTopTen(false);
         setHighScoreDisplay(false);
         setHighScoreDisplay(true);
     }
@@ -216,7 +216,6 @@ const Play = () => {
     if (gameOver === false) {
         return (
             <>
-                <button onClick={() => { setWinner(true); setGameOver(true) }}>Winner</button>
                 <PhotoContainer>
                     {photos?.map(photo => (
                         <PartImg key={photo.id} src={photo.filename} alt="Part" />
