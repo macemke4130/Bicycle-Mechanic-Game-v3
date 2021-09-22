@@ -1,0 +1,11 @@
+- Game Over
+    - 100% gets your name in the 100 Club
+- Scoreboard Page
+    - Nav
+    - Scoreboard Component
+- About
+    - Donate
+    - Credits
+    - Hire Me
+- Scoreboard
+    - Unmount Input Name on Submit
