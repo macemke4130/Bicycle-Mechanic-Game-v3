@@ -154,8 +154,13 @@ const Play = () => {
         // Checks database to see if user is in the Top 10 high scores --
 
         const r = await gql(`{ highscores { totalscore } }`);
-        const lowestHighScore = r.highscores[r.highscores.length - 1].totalscore;
-        if (totalScore > lowestHighScore) updateHighScore();
+
+        if (r.length < 10) {
+            if (totalScore > 0) updateHighScore();
+        } else {
+            const lowestHighScore = r.highscores[r.highscores.length - 1].totalscore;
+            if (totalScore > lowestHighScore) updateHighScore();
+        }
     }
 
     const updateHighScore = () => {
@@ -219,7 +224,7 @@ const Play = () => {
                 <PhotoContainer>
                     {photos?.map(photo => (
                         <PartImg key={photo.id} src={photo.filename} alt="Part" />
-                    ))} 
+                    ))}
                 </PhotoContainer>
                 {answers?.map(answer => (
                     <AnswerDiv key={answer.id}>
@@ -259,7 +264,7 @@ const Play = () => {
         return (
             <>
                 <CenteredColContainer>
-                <YouAreLoser>Game Over</YouAreLoser>
+                    <YouAreLoser>Game Over</YouAreLoser>
                     <button onClick={handlePlayAgain}>Play Again?</button>
                     <HeadlineOne>Total Score: {totalScore}</HeadlineOne>
                     {inTopTen && <InputHighScore scorePass={scorePass} refeshHighScore={refeshHighScore} />}

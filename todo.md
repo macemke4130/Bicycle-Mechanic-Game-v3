@@ -1,5 +1,8 @@
-- Game Over
-    - 100% gets your name in the 100 Club
+- Nav
+    - Format
+- Mobile
+    - CSS hover gives away answer. Turn off for small screens
+    - Shrink photos and stack them for small screens?
 - Scoreboard Page
     - Nav
     - Scoreboard Component
@@ -8,5 +11,4 @@
     - Credits
     - Hire Me
 - Scoreboard
-    - Unmount Input Name on Submit
-    - BG color of title row
+    - Bug for input if number of high scores is less than ten
