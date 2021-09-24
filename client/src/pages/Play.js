@@ -222,6 +222,10 @@ const Play = () => {
         setTotalScore(totalScore + 500);
     }
 
+    const showTotalScore = () => {
+        console.log(props.scorePass.totalScore);
+    }
+
     if (loading) return <Loading />;
 
     if (gameOver === false) {
@@ -253,6 +257,7 @@ const Play = () => {
     if (winner) {
         return (
             <>
+            <button onClick={showTotalScore}>Total Score</button>
                 <CenteredColContainer>
                     <YouAreWinner>You Win!</YouAreWinner>
                     <button onClick={handlePlayAgain}>Play Again?</button>
@@ -270,6 +275,7 @@ const Play = () => {
     if (gameOver) {
         return (
             <>
+            <button onClick={showTotalScore}>Total Score</button>
                 <CenteredColContainer>
                     <YouAreLoser>Game Over</YouAreLoser>
                     <button onClick={handlePlayAgain}>Play Again?</button>
