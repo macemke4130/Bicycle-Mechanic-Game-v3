@@ -22,6 +22,8 @@ const InputHighScore = (props) => {
                       insertId
                     }
                   }`);
+                  console.log(props);
+                  console.log(r);
                 if (r) props.refeshHighScore();
             } catch (e) {
                 console.error(e);

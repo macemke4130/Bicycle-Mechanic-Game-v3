@@ -216,11 +216,18 @@ const Play = () => {
         if (flag) getAllParts();
     });
 
+    const handleCheat = () => {
+        setWinner(true);
+        setInTopTen(true);
+        setTotalScore(10000);
+    }
+
     if (loading) return <Loading />;
 
     if (gameOver === false) {
         return (
-            <>
+            <> 
+            <button onClick={handleCheat}>Cheat</button>
                 <PhotoContainer>
                     {photos?.map(photo => (
                         <PartImg key={photo.id} src={photo.filename} alt="Part" />
