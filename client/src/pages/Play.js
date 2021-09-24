@@ -126,6 +126,7 @@ const Play = () => {
 
     const handlePlayAgain = () => {
         // Refesh page to play again --
+
         history.go(0);
     }
 
@@ -155,20 +156,23 @@ const Play = () => {
     const highScoreCheck = async () => {
         // Checks database to see if user is in the Top 10 high scores --
 
-        const r = await gql(`{ highscores { totalscore } }`);
+        try {
+            const r = await gql(`{ highscores { totalscore } }`);
 
-        if (r.length < 10) {
-            if (totalScore > 0) setInTopTen(true);
-        } else {
-            const lowestHighScore = r.highscores[r.highscores.length - 1].totalscore;
-            if (totalScore > lowestHighScore) {
-                setInTopTen(true);
+            if (r.length < 10) {
+                if (totalScore > 0) setInTopTen(true);
+            } else {
+                const lowestHighScore = r.highscores[r.highscores.length - 1].totalscore;
+                if (totalScore > lowestHighScore) setInTopTen(true);
             }
+        } catch (e) {
+            console.error(e);
         }
     }
 
     const refeshHighScore = () => {
         // Refreshes the scoreboard component when user enters their name --
+
         setInTopTen(false);
         setHighScoreDisplay(false);
         setHighScoreDisplay(true);
@@ -257,7 +261,9 @@ const Play = () => {
             <>
                 <CenteredColContainer>
                     <YouAreWinner>You Win!</YouAreWinner>
-                    <StartGameButton onClick={handlePlayAgain}><StartGameButtonTitle>Play Again?</StartGameButtonTitle></StartGameButton>
+                    <StartGameButton onClick={handlePlayAgain}>
+                        <StartGameButtonTitle>Play Again?</StartGameButtonTitle>
+                    </StartGameButton>
                     <HeadlineOne>Total Score: {totalScore}</HeadlineOne>
                     {inTopTen && <InputHighScore submitHighScoreName={submitHighScoreName} setWinnerName={setWinnerName} />}
                 </CenteredColContainer>
@@ -274,7 +280,9 @@ const Play = () => {
             <>
                 <CenteredColContainer>
                     <YouAreLoser>Game Over</YouAreLoser>
-                    <StartGameButton onClick={handlePlayAgain}><StartGameButtonTitle>Play Again?</StartGameButtonTitle></StartGameButton>
+                    <StartGameButton onClick={handlePlayAgain}>
+                        <StartGameButtonTitle>Play Again?</StartGameButtonTitle>
+                    </StartGameButton>
                     <HeadlineOne>Total Score: {totalScore}</HeadlineOne>
                     {inTopTen && <InputHighScore submitHighScoreName={submitHighScoreName} setWinnerName={setWinnerName} />}
                 </CenteredColContainer>

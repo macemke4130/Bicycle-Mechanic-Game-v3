@@ -13,9 +13,13 @@ const Scoreboard = () => {
 
     const getHighScores = async () => {
         setFlag(false);
-        const r = await gql(`{ highscores { id, name, totalscore, club100, club100num, scoredate } }`);
-        setHighscores(r.highscores);
-        setLoading(false);
+        try {
+            const r = await gql(`{ highscores { id, name, totalscore, club100, club100num, scoredate } }`);
+            setHighscores(r.highscores);
+            setLoading(false);
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     useEffect(() => {
