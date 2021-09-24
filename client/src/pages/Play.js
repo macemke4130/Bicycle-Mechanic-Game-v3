@@ -149,8 +149,8 @@ const Play = () => {
     const gameLost = () => {
         // Time over or wrong answer submitted --
 
-        setGameOver(true);
         highScoreCheck();
+        setGameOver(true);
     }
 
     const highScoreCheck = async () => {
