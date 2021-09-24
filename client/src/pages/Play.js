@@ -219,7 +219,7 @@ const Play = () => {
     const handleCheat = () => {
         setWinner(true);
         setInTopTen(true);
-        setTotalScore(10000);
+        setTotalScore(totalScore + 500);
     }
 
     if (loading) return <Loading />;
