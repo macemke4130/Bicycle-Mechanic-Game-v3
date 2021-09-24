@@ -22,8 +22,7 @@ const InputHighScore = (props) => {
                       insertId
                     }
                   }`);
-                  console.log(props);
-                  console.log(r);
+                  console.log(props.scorePasstotalScore);
                 if (r) props.refeshHighScore();
             } catch (e) {
                 console.error(e);
@@ -31,10 +30,15 @@ const InputHighScore = (props) => {
         }
     }
 
+    const showTotalScore = () => {
+        console.log(props.scorePass.totalScore);
+    }
+
     return (
         <>
             <p>You're in the top ten high scores!</p>
             <p>Enter your name.</p>
+            <button onClick={showTotalScore}>Total Score</button>
             <input type="text" id="name" col={50} onChange={handleName} value={highScoreName} autoComplete="off"></input>
             <button onClick={submitHighScoreName}>Submit</button>
         </>
