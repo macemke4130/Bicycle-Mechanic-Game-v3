@@ -58,15 +58,16 @@ const Play = () => {
         }
     }
 
-    const getPart = async (x) => {
+    const getPart = async (partIdNumber) => {
         // Gets individual part and its photos --
 
         try {
-            const r = await gql(`{ part(id: ${x}) { id win lose1 lose2 lose3 }, photo(part_id: ${x}) { id filename }}`);
+            const r = await gql(`{ part(id: ${partIdNumber}) { id win lose1 lose2 lose3 }, photo(part_id: ${partIdNumber}) { id filename }}`);
 
             let allPics = [];
             for (let i = 0; i < r.photo.length; i++) {
                 // Photo formatting for React import --
+
                 let myObject = { id: null, filename: null };
                 const myPic = images(`./${r.photo[i].filename}.jpg`);
                 myObject.id = r.photo[i].id;
@@ -90,7 +91,7 @@ const Play = () => {
 
             if (index === 0) setIndex(1); // Fixes initial load index --
         } catch (e) {
-            console.error("Getting Part ID: " + x + " - " + e);
+            console.error("Getting Part ID: " + partIdNumber + " - " + e);
         }
     }
 
@@ -141,9 +142,9 @@ const Play = () => {
     const gameWin = () => {
         // All questions answered correctly --
 
+        highScoreCheck();
         setGameOver(true);
         setWinner(true);
-        highScoreCheck();
     }
 
     const gameLost = () => {
@@ -159,9 +160,15 @@ const Play = () => {
         try {
             const r = await gql(`{ highscores { totalscore } }`);
 
-            if (r.length < 10) {
+            if (r.highscores.length < 10) {
+                // If there are fewer than 10 scores --
+                // and the score is greater than zero --
+
                 if (totalScore > 0) setInTopTen(true);
             } else {
+                // If the user's totalScore is greater than
+                // the lowest top ten score, show input name field --
+
                 const lowestHighScore = r.highscores[r.highscores.length - 1].totalscore;
                 if (totalScore > lowestHighScore) setInTopTen(true);
             }
@@ -172,6 +179,7 @@ const Play = () => {
 
     const refeshHighScore = () => {
         // Refreshes the scoreboard component when user enters their name --
+        // and unmounts the input field --
 
         setInTopTen(false);
         setHighScoreDisplay(false);
@@ -179,6 +187,8 @@ const Play = () => {
     }
 
     const submitHighScoreName = async () => {
+        // Inputs new high score to the database --
+
         try {
             const r = await gql(` mutation { updateHighScore( 
                     name: "${winnerName}", 
