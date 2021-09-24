@@ -223,7 +223,7 @@ const Play = () => {
     }
 
     const showTotalScore = () => {
-        console.log(props.scorePass.totalScore);
+        console.log(totalScore);
     }
 
     if (loading) return <Loading />;
