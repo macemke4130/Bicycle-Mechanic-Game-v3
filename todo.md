@@ -1,3 +1,5 @@
+- Play
+    - "Loading" image or text when part photo is not loaded yet
 - Nav
     - Format
 - Mobile
@@ -10,5 +12,3 @@
     - Donate
     - Credits
     - Hire Me
-- Scoreboard
-    - Bug for input if number of high scores is less than ten
