@@ -143,7 +143,7 @@ const Play = () => {
         // All questions answered correctly --
 
         highScoreCheck();
-        setGameOver(true);
+        // setGameOver(true);
         setWinner(true);
     }
 
@@ -151,7 +151,7 @@ const Play = () => {
         // Time over or wrong answer submitted --
 
         highScoreCheck();
-        setGameOver(true);
+        // setGameOver(true);
     }
 
     const highScoreCheck = async () => {
@@ -240,11 +240,16 @@ const Play = () => {
         if (flag) getAllParts();
     });
 
+    useEffect(() => {
+        if (inTopTen === true) setGameOver(true);
+    }, [inTopTen])
+
     if (loading) return <Loading />;
 
     if (gameOver === false) {
         return (
             <>
+            <button onClick={setInTopTen(true)}>Top Ten</button>
                 <PhotoContainer>
                     {photos?.map(photo => (
                         <PartImg key={photo.id} src={photo.filename} alt="Part" />
