@@ -170,7 +170,8 @@ const Play = () => {
                 // the lowest top ten score, show input name field --
 
                 const lowestHighScore = r.highscores[r.highscores.length - 1].totalscore;
-                if (totalScore > lowestHighScore) setInTopTen(true);
+                console.log("Lowest High Score: " + lowestHighScore);
+                if (totalScore >= lowestHighScore) setInTopTen(true);
             }
         } catch (e) {
             console.error(e);

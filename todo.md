@@ -1,5 +1,6 @@
 - Play
     - "Loading" image or text when part photo is not loaded yet
+    - Combine "winner" and "game over" renders. Separate YOU SOMETHING with a ternary.
 - Nav
     - Format
 - Mobile
