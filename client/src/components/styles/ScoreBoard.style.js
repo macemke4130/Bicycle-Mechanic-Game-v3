@@ -43,6 +43,8 @@ export const ScoreDate = styled.span`
 `;
 
 export const YouAreWinner = styled.div`
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
     animation-name: Animate-In;
     animation-duration: 1s;
     animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -56,6 +58,8 @@ export const YouAreWinner = styled.div`
 `;
 
 export const YouAreLoser = styled.div`
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+
     animation-name: Animate-In;
     animation-duration: 1s;
     animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);

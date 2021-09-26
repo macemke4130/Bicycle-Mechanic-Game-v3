@@ -1,14 +1,16 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 
+import { NavigationPanel, NavLink } from "./styles/Nav.style";
+
 const Nav = (props) => {
     return (
-        <nav>
-            <Link to="/">Home</Link>
-            <Link to="/play">Play</Link>
-            <Link to="/scoreboard">Scoreboard</Link>
-            <Link to="/about">About</Link>
-        </nav>
+        <NavigationPanel>
+            <Link to="/" style={{ textDecoration: 'none' }}><NavLink>Home</NavLink></Link>
+            <Link to="/play" style={{ textDecoration: 'none' }}><NavLink>Play</NavLink></Link>
+            <Link to="/scoreboard" style={{ textDecoration: 'none' }}><NavLink>Scoreboard</NavLink></Link>
+            <Link to="/about" style={{ textDecoration: 'none' }}><NavLink>About</NavLink></Link>
+        </NavigationPanel>
     )
 }
 

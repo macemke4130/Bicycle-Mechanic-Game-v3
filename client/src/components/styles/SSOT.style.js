@@ -14,3 +14,8 @@ export const HeadlineOne = styled.h1`
     margin: 0;
     padding: 0;
 `;
+
+export const Para = styled.p`
+    font-family: ${font};
+    font-size: 1em;
+`;

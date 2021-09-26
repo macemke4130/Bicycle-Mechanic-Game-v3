@@ -14,3 +14,5 @@
     - Donate
     - Credits
     - Hire Me
+- Home Page
+    - Remove image buttons in example

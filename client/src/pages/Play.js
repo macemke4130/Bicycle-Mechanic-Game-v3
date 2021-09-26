@@ -285,6 +285,7 @@ const Play = () => {
         return (
             <>
                 <CenteredColContainer>
+                    <Nav />
                     {winner ? <YouAreWinner>You Win!</YouAreWinner> : <YouAreLoser>Game Over</YouAreLoser>}
                     <StartGameButton onClick={handlePlayAgain}>
                         <StartGameButtonTitle>Play Again?</StartGameButtonTitle>
@@ -293,7 +294,6 @@ const Play = () => {
                     {inTopTen && <InputHighScore submitHighScoreName={submitHighScoreName} setWinnerName={setWinnerName} />}
                 </CenteredColContainer>
                 {highScoreDisplay && <Scoreboard refeshHighScore={refeshHighScore} />}
-                <Nav />
             </>
         )
     }
