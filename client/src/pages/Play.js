@@ -242,6 +242,16 @@ const Play = () => {
         if (flag) getAllParts();
     });
 
+    const handleEnterKey = (e) => {
+        // Prevents a user from using the Enter key to submit a winning choice --
+        e.preventDefault();
+    }
+
+    const handleFocus = (e) => {
+        // Prevents a user from keeping focus to see the correct answer --
+        e.target.blur();
+    }
+
     if (loading) return <Loading />;
 
     if (gamePlay) {
@@ -255,7 +265,7 @@ const Play = () => {
 
                 {answers?.map(answer => (
                     <AnswerDiv key={answer.id}>
-                        <Button key={answer.id} onClick={handleChoice}>{answer.name}</Button>
+                        <Button key={answer.id} tabIndex="-1" onFocus={handleFocus} onKeyUp={handleEnterKey} onKeyDown={handleEnterKey} onKeyPress={handleEnterKey} onSubmit={handleEnterKey} onClick={handleChoice}>{answer.name}</Button>
                     </AnswerDiv>
                 ))}
 
