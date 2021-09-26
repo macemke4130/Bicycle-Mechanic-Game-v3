@@ -19,7 +19,7 @@ const images = require.context('../../public/images', true);
 const Play = () => {
     const [loading, setLoading] = useState(true);
     const [flag, setFlag] = useState(true);
-    const [gameOver, setGameOver] = useState(false);
+    // const [gameOver, setGameOver] = useState(false);
     const [winner, setWinner] = useState(false);
     const [highScoreDisplay, setHighScoreDisplay] = useState(true);
     const [allParts, setAllParts] = useState([]);
@@ -35,6 +35,7 @@ const Play = () => {
     const [club100num, setClub100num] = useState(0);
     const [resetTimer, setResetTimer] = useState(false);
     const [winnerName, setWinnerName] = useState("");
+    const [gamePlay, setGamePlay] = useState(true);
 
     const history = useHistory();
 
@@ -142,40 +143,14 @@ const Play = () => {
     const gameWin = () => {
         // All questions answered correctly --
 
-        highScoreCheck();
-        setGameOver(true);
         setWinner(true);
+        setGamePlay(false);
     }
 
     const gameLost = () => {
         // Time over or wrong answer submitted --
 
-        highScoreCheck();
-        setGameOver(true);
-    }
-
-    const highScoreCheck = async () => {
-        // Checks database to see if user is in the Top 10 high scores --
-
-        try {
-            const r = await gql(`{ highscores { totalscore } }`);
-
-            if (r.highscores.length < 10) {
-                // If there are fewer than 10 scores --
-                // and the score is greater than zero --
-
-                if (totalScore > 0) setInTopTen(true);
-            } else {
-                // If the user's totalScore is greater than
-                // the lowest top ten score, show input name field --
-
-                const lowestHighScore = r.highscores[r.highscores.length - 1].totalscore;
-                console.log("Lowest High Score: " + lowestHighScore);
-                if (totalScore >= lowestHighScore) setInTopTen(true);
-            }
-        } catch (e) {
-            console.error(e);
-        }
+        setGamePlay(false);
     }
 
     const refeshHighScore = () => {
@@ -241,18 +216,42 @@ const Play = () => {
     });
 
     useEffect(() => {
+        // Checks High Scores when gamePlay = false --
 
-    }, [inTopTen])
+        if (gamePlay === false) {
+            (async () => {
+                try {
+                    console.log("Fetching High Scores");
+                    const r = await gql(`{ highscores { totalscore } }`);
+
+                    if (r.highscores.length < 10) {
+                        // If there are fewer than 10 scores --
+                        // and the score is greater than zero --
+
+                        if (totalScore > 0) setInTopTen(true);
+                    } else {
+                        // If the user's totalScore is greater than
+                        // the lowest top ten score, show input name field --
+
+                        const lowestHighScore = r.highscores[r.highscores.length - 1].totalscore;
+                        console.log("Lowest High Score: " + lowestHighScore);
+                        if (totalScore >= lowestHighScore) setInTopTen(true);
+                    }
+                } catch (e) {
+                    console.error(e);
+                }
+            })()
+        }
+    }, [gamePlay, totalScore])
 
     const handleTopTen = () => {
         setInTopTen(true);
     }
     if (loading) return <Loading />;
 
-    if (gameOver === false) {
+    if (gamePlay) {
         return (
             <>
-            <button onClick={handleTopTen}>Top Ten</button>
                 <PhotoContainer>
                     {photos?.map(photo => (
                         <PartImg key={photo.id} src={photo.filename} alt="Part" />
@@ -273,32 +272,13 @@ const Play = () => {
                 ))}
             </>
         )
-    }
+    } else {
+        // Game Over --
 
-    if (winner) {
         return (
             <>
                 <CenteredColContainer>
-                    <YouAreWinner>You Win!</YouAreWinner>
-                    <StartGameButton onClick={handlePlayAgain}>
-                        <StartGameButtonTitle>Play Again?</StartGameButtonTitle>
-                    </StartGameButton>
-                    <HeadlineOne>Total Score: {totalScore}</HeadlineOne>
-                    {inTopTen && <InputHighScore submitHighScoreName={submitHighScoreName} setWinnerName={setWinnerName} />}
-                </CenteredColContainer>
-                {highScoreDisplay && <Scoreboard refeshHighScore={refeshHighScore} />}
-                <Nav />
-
-
-            </>
-        )
-    }
-
-    if (gameOver) {
-        return (
-            <>
-                <CenteredColContainer>
-                    <YouAreLoser>Game Over</YouAreLoser>
+                    {winner ? <YouAreWinner>You Win!</YouAreWinner> : <YouAreLoser>Game Over</YouAreLoser>}
                     <StartGameButton onClick={handlePlayAgain}>
                         <StartGameButtonTitle>Play Again?</StartGameButtonTitle>
                     </StartGameButton>
