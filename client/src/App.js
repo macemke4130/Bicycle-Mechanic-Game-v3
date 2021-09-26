@@ -2,7 +2,7 @@ import * as React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Home from "./pages/Home";
-import Play from "./pages/Play";
+import Play from "./pages/Play-2";
 import Scoreboard from "./components/Scoreboard";
 
 function App() {
