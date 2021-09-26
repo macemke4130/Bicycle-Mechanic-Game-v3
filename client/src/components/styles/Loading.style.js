@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const LoadingSpinner = styled.img`
-    width: 50%;
+    width: 25%;
     animation: spin 10s linear infinite;
 
     @keyframes spin {

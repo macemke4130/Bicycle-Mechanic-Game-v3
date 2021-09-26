@@ -9,11 +9,8 @@
 - Scoreboard Page
     - Nav
     - Scoreboard Component
+    - Input name maximum name length
 - About
     - Donate
     - Credits
     - Hire Me
-
-    Combine Game Over and Game Win into one state.
-    Add UseEffect listening for the single game over state that toggles the high score check function
-    

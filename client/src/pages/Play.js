@@ -210,18 +210,11 @@ const Play = () => {
     }, [allParts, index]);
 
     useEffect(() => {
-        // Run Program --
-
-        if (flag) getAllParts();
-    });
-
-    useEffect(() => {
         // Checks High Scores when gamePlay = false --
 
         if (gamePlay === false) {
             (async () => {
                 try {
-                    console.log("Fetching High Scores");
                     const r = await gql(`{ highscores { totalscore } }`);
 
                     if (r.highscores.length < 10) {
@@ -234,7 +227,6 @@ const Play = () => {
                         // the lowest top ten score, show input name field --
 
                         const lowestHighScore = r.highscores[r.highscores.length - 1].totalscore;
-                        console.log("Lowest High Score: " + lowestHighScore);
                         if (totalScore >= lowestHighScore) setInTopTen(true);
                     }
                 } catch (e) {
@@ -244,9 +236,12 @@ const Play = () => {
         }
     }, [gamePlay, totalScore])
 
-    const handleTopTen = () => {
-        setInTopTen(true);
-    }
+    useEffect(() => {
+        // Run Program --
+
+        if (flag) getAllParts();
+    });
+
     if (loading) return <Loading />;
 
     if (gamePlay) {
@@ -257,11 +252,13 @@ const Play = () => {
                         <PartImg key={photo.id} src={photo.filename} alt="Part" />
                     ))}
                 </PhotoContainer>
+
                 {answers?.map(answer => (
                     <AnswerDiv key={answer.id}>
                         <Button key={answer.id} onClick={handleChoice}>{answer.name}</Button>
                     </AnswerDiv>
                 ))}
+
                 <Feedback>
                     <Timer points={points} updatePoints={updatePoints} resetTimer={resetTimer} />
                     <P>Total Score: {totalScore}</P>

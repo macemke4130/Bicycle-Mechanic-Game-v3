@@ -74,7 +74,7 @@ export const root = {
         return r;
     },
     highscores: async () => {
-        const r = await query("select * from highscores order by totalscore desc limit 10");
+        const r = await query("select * from highscores order by totalscore desc, scoredate desc limit 10");
         
         for (let i = 0; i < r.length; i++) {
           const dateFormat = dayjs(r[i].scoredate).format("MMM DD, YYYY");

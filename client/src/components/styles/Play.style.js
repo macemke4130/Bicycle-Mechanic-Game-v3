@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { font } from './SSOT.style';
 
+const screenSize = "768px";
+
 export const Button = styled.button`
     font-family: ${font};
     color: black;
@@ -31,12 +33,23 @@ export const PartImg = styled.img`
     border-radius: 1em;
     border: 1px solid black;
     margin: 0.25em;
+
+    @media (max-width: ${screenSize}) {
+        height: 25vh;
+        width: auto;
+    }
 `;
 
 export const PhotoContainer = styled.div`
     display: flex;
+    flex-direction: row;
     justify-content: center;
-    width: 100%;
+
+    @media (max-width: ${screenSize}) {
+        display: block;
+        flex-direction: column;
+        align-content: center;
+    }
 `;
 
 export const Feedback = styled.div`
