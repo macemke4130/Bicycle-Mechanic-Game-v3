@@ -8,6 +8,13 @@ export const CenteredColContainer = styled.div`
     place-items: center;
 `;
 
+export const CenteredRowContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+`;
+
 export const HeadlineOne = styled.h1`
     font-family: ${font};
     font-size: 2em;
@@ -18,4 +25,6 @@ export const HeadlineOne = styled.h1`
 export const Para = styled.p`
     font-family: ${font};
     font-size: 1em;
+    margin: 0.25em;
+    padding: 0.25em;
 `;

@@ -1,15 +1,62 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { CenteredColContainer } from '../components/styles/SSOT.style';
-import { GamePlayImg, HowToPlayList, ListItem, StartGameButton, StartGameButtonTitle } from '../components/styles/Home.style';
+import { CenteredColContainer, CenteredRowContainer, HeadlineOne, Para } from '../components/styles/SSOT.style';
+import { HowToPlayList, ListItem, StartGameButton, StartGameButtonTitle } from '../components/styles/Home.style';
+import { PhotoContainer, PartImg } from '../components/styles/Play.style';
+import { NavLink } from '../components/styles/Nav.style';
 
-import GamePlay from '../images/gameplay.jpg';
+import { gql } from '../utils/gql';
+import Loading from '../components/Loading';
+
+const images = require.context('../../public/images', true);
 
 const Home = () => {
+    const [loading, setLoading] = useState(true);
+    const [gateOpen, setGateOpen] = useState(true);
+    const [partCount, setPartCount] = useState(null);
+    const [photos, setPhotos] = useState([]);
+
+    useEffect(() => {
+        (async () => {
+            if (gateOpen) {
+                setGateOpen(false);
+
+                const partIdToFetch = 6; // Rotor Lock Washer --
+
+                const r = await gql(` { photo (part_id: ${partIdToFetch}) { id, filename } } `);
+
+                let formattedPhotos = [];
+                for (let i = 0; i < r.photo.length; i++) {
+                    let myObject = { id: null, filename: null };
+                    const myPic = images(`./${r.photo[i].filename}.jpg`);
+                    myObject.id = r.photo[i].id;
+                    myObject.filename = myPic.default;
+                    formattedPhotos[i] = myObject;
+                }
+                setPhotos(formattedPhotos);
+                getTotalParts();
+                setLoading(false);
+            }
+        })()
+    });
+
+    const getTotalParts = async () => {
+        const r = await gql(` { partCount } `);
+        setPartCount(r.partCount);
+    }
+
+    if (loading) return <Loading />
+
     return (
         <CenteredColContainer>
-            <GamePlayImg src={GamePlay} alt="Game Play" />
+            <HeadlineOne>Name That Part!</HeadlineOne>
+            <PhotoContainer>
+                {photos?.map(photo => (
+                    <PartImg key={photo.id} src={photo.filename} alt="Part" />
+                ))}
+            </PhotoContainer>
             <HowToPlayList>
                 <ListItem>Choose the part from the supplied options based on the photos you see</ListItem>
                 <ListItem>You have 20 seconds to make your choice</ListItem>
@@ -19,7 +66,14 @@ const Home = () => {
                 <ListItem>An incorrect answer will end the game</ListItem>
                 <ListItem>Have fun and try to beat your friend's score!</ListItem>
             </HowToPlayList>
-            <Link to="/play" style={{ textDecoration: 'none' }}><StartGameButton><StartGameButtonTitle>Start Game!</StartGameButtonTitle></StartGameButton></Link>
+            {partCount && <Para>There are currently {partCount} parts in the game and I add more all the time!</Para>}
+            <Link to="/play" style={{ textDecoration: 'none' }}>
+                <StartGameButton><StartGameButtonTitle>Start Game!</StartGameButtonTitle></StartGameButton>
+            </Link>
+            <CenteredRowContainer>
+                <Link to="/scoreboard" style={{ textDecoration: 'none' }}><NavLink>Scoreboard</NavLink></Link>
+                <Link to="/about" style={{ textDecoration: 'none' }}><NavLink>About</NavLink></Link>
+            </CenteredRowContainer>
         </CenteredColContainer>
     )
 }

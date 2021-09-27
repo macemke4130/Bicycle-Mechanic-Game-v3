@@ -1,10 +1,8 @@
 - Play
     - "Loading" image or text when part photo is not loaded yet
-    - Combine "winner" and "game over" renders. Separate YOU SOMETHING with a ternary.
 - Nav
     - Format
 - Mobile
-    - CSS hover gives away answer. Turn off for small screens
     - Shrink photos and stack them for small screens?
 - Scoreboard Page
     - Nav
@@ -16,3 +14,4 @@
     - Hire Me
 - Home Page
     - Remove image buttons in example
+    - Add line with DB call displaying how many parts are in the game

@@ -10,6 +10,7 @@ export const schema = buildSchema(`
     allPhotos: [Photo]
     photo(part_id: Int!): [Photo]
     highscores: [HighScore]
+    partCount: Int
   }
 
   type Mutation {
@@ -81,6 +82,10 @@ export const root = {
           r[i].scoredate = dateFormat;
       }
         return r;
+    },
+    partCount: async () => {
+      const r = await query("select count(*) as 'parts' from parts");
+      return r[0].parts;
     },
     // Mutations --
     updateHighScore: async (args) => {

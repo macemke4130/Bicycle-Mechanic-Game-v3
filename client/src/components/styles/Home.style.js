@@ -11,6 +11,8 @@ export const HowToPlayList = styled.ul`
     font-size: 1em;
     text-align: center;
     list-style-type: none;
+    margin: 0.25em;
+    padding: 0.25em;
 `;
 
 export const ListItem = styled.li`
