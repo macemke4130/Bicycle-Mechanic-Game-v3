@@ -36,6 +36,8 @@ const Play = () => {
     const [resetTimer, setResetTimer] = useState(false);
     const [winnerName, setWinnerName] = useState("");
     const [gamePlay, setGamePlay] = useState(true);
+    
+    const pointDrop = 25; // Points that drop per timer interval --
 
     const history = useHistory();
 
@@ -137,7 +139,7 @@ const Play = () => {
 
         setPoints(pointsFromTimer);
         setResetTimer(false);
-        if (points < 0) gameLost();
+        if (points <= pointDrop) gameLost();
     }
 
     const gameWin = () => {
@@ -154,7 +156,7 @@ const Play = () => {
     }
 
     const refeshHighScore = () => {
-        // Refreshes the scoreboard component when user enters their name --
+        // Refreshes the scoreboard component when user enters their name
         // and unmounts the input field --
 
         setInTopTen(false);
@@ -270,7 +272,7 @@ const Play = () => {
                 ))}
 
                 <Feedback>
-                    <Timer points={points} updatePoints={updatePoints} resetTimer={resetTimer} />
+                    <Timer points={points} updatePoints={updatePoints} resetTimer={resetTimer} pointDrop={pointDrop} />
                     <P>Total Score: {totalScore}</P>
                 </Feedback>
 

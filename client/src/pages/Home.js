@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { CenteredColContainer, CenteredRowContainer, HeadlineOne, Para } from '../components/styles/SSOT.style';
+import { CenteredColContainer, CenteredRowContainer, HeadlineOne } from '../components/styles/SSOT.style';
 import { HowToPlayList, ListItem, StartGameButton, StartGameButtonTitle } from '../components/styles/Home.style';
 import { PhotoContainer, PartImg } from '../components/styles/Play.style';
 import { NavLink } from '../components/styles/Nav.style';
@@ -69,8 +69,9 @@ const Home = () => {
                 <ListItem>A correct answer will add the remaining points to your total score and load the next part</ListItem>
                 <ListItem>An incorrect answer will end the game</ListItem>
                 <ListItem>Have fun and try to beat your friend's score!</ListItem>
+                {partCount && <ListItem>There are currently {partCount} parts in the game and I add more every week</ListItem>}
             </HowToPlayList>
-            {partCount && <Para>There are currently {partCount} parts in the game and I add more every week.</Para>}
+            
             <CenteredRowContainer>
                 <Link to="/scoreboard" style={{ textDecoration: 'none' }}><NavLink>Scoreboard</NavLink></Link>
                 <Link to="/play" style={{ textDecoration: 'none' }}>

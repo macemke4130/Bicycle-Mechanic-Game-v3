@@ -6,15 +6,15 @@ import { P } from './styles/Play.style';
 const Timer = (props) => {
     const [insidePoints, setInsidePoints] = useState(props.points);
 
-    useEffect(()=>{
-    let myInterval = setInterval(() => {
-            setInsidePoints(insidePoints => insidePoints - 25);
-            if(props.resetTimer) setInsidePoints(500);
+    useEffect(() => {
+        let myInterval = setInterval(() => {
+            setInsidePoints(insidePoints => insidePoints - props.pointDrop);
+            if (props.resetTimer) setInsidePoints(500);
             props.updatePoints(insidePoints);
         }, 1000)
-        return ()=> {
+        return () => {
             clearInterval(myInterval);
-          };
+        };
     });
 
     return (

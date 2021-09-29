@@ -28,4 +28,14 @@ export const Para = styled.p`
     font-size: 1em;
     margin: 0.25em;
     padding: 0.25em;
+    width: 75%;
+`;
+
+export const CenterPara = styled.p`
+    font-family: ${font};
+    font-size: 1em;
+    margin: 0.25em;
+    padding: 0.25em;
+    width: 75%;
+    text-align: center;
 `;

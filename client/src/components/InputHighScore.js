@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Para } from './styles/SSOT.style';
+import { CenterPara } from './styles/SSOT.style';
 import { InputName } from './styles/ScoreBoard.style';
 
 const InputHighScore = (props) => {
@@ -11,9 +11,8 @@ const InputHighScore = (props) => {
 
     return (
         <>
-            <Para>You're in the top ten high scores!</Para>
-            <Para>Enter your name.</Para>
-            <InputName type="text" id="name" size="30" maxLength="25" onChange={handleName} autoComplete="off"></InputName>
+            <CenterPara>You're in the top ten high scores!</CenterPara>
+            <InputName type="text" id="name" size="30" maxLength="25" onChange={handleName} placeholder="Enter your name" autoComplete="off"></InputName>
             <button onClick={props.submitHighScoreName}>Submit</button>
         </>
     )
