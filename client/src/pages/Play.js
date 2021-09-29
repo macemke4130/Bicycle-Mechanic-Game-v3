@@ -244,12 +244,12 @@ const Play = () => {
 
     const handleEnterKey = (e) => {
         // Prevents a user from using the Enter key to submit a winning choice --
-        // e.preventDefault();
+        e.preventDefault();
     }
 
     const handleFocus = (e) => {
         // Prevents a user from keeping focus to see the correct answer --
-        // e.target.blur();
+        e.target.blur();
     }
 
     if (loading) return <Loading />;
