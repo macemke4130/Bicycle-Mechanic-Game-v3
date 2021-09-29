@@ -1,25 +1,25 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import { gql } from '../utils/gql';
 
 import Timer from '../components/Timer';
-import Nav from '../components/Nav';
-import Scoreboard from '../components/Scoreboard';
+import ScoreboardDisplay from '../components/ScoreboardDisplay';
 import InputHighScore from '../components/InputHighScore';
 import Loading from '../components/Loading';
+
 import { Button, AnswerDiv, PartImg, PhotoContainer, Feedback, P } from '../components/styles/Play.style';
 import { YouAreWinner, YouAreLoser } from '../components/styles/ScoreBoard.style';
 import { HeadlineOne, CenteredColContainer } from '../components/styles/SSOT.style';
 import { StartGameButton, StartGameButtonTitle } from '../components/styles/Home.style';
+import { NavigationPanel, NavLink } from '../components/styles/Nav.style';
 
 const images = require.context('../../public/images', true);
 
 const Play = () => {
     const [loading, setLoading] = useState(true);
     const [flag, setFlag] = useState(true);
-    // const [gameOver, setGameOver] = useState(false);
     const [winner, setWinner] = useState(false);
     const [highScoreDisplay, setHighScoreDisplay] = useState(true);
     const [allParts, setAllParts] = useState([]);
@@ -244,12 +244,12 @@ const Play = () => {
 
     const handleEnterKey = (e) => {
         // Prevents a user from using the Enter key to submit a winning choice --
-        e.preventDefault();
+        // e.preventDefault();
     }
 
     const handleFocus = (e) => {
         // Prevents a user from keeping focus to see the correct answer --
-        e.target.blur();
+        // e.target.blur();
     }
 
     if (loading) return <Loading />;
@@ -285,7 +285,11 @@ const Play = () => {
         return (
             <>
                 <CenteredColContainer>
-                    <Nav />
+                    <NavigationPanel>
+                        <Link to="/" style={{ textDecoration: 'none' }}><NavLink>Home</NavLink></Link>
+                        <Link to="/scoreboard" style={{ textDecoration: 'none' }}><NavLink>Scoreboard</NavLink></Link>
+                        <Link to="/about" style={{ textDecoration: 'none' }}><NavLink>About</NavLink></Link>
+                    </NavigationPanel>
                     {winner ? <YouAreWinner>You Win!</YouAreWinner> : <YouAreLoser>Game Over</YouAreLoser>}
                     <StartGameButton onClick={handlePlayAgain}>
                         <StartGameButtonTitle>Play Again?</StartGameButtonTitle>
@@ -293,7 +297,7 @@ const Play = () => {
                     <HeadlineOne>Total Score: {totalScore}</HeadlineOne>
                     {inTopTen && <InputHighScore submitHighScoreName={submitHighScoreName} setWinnerName={setWinnerName} />}
                 </CenteredColContainer>
-                {highScoreDisplay && <Scoreboard refeshHighScore={refeshHighScore} />}
+                {highScoreDisplay && <ScoreboardDisplay refeshHighScore={refeshHighScore} />}
             </>
         )
     }

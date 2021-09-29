@@ -4,8 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from "./pages/Home";
 import Play from "./pages/Play";
 import About from "./pages/About";
-import Scoreboard from "./components/Scoreboard";
-import Nav from "./components/Nav";
+import Scoreboard from "./pages/Scoreboard";
 
 function App() {
 	return (
@@ -18,7 +17,6 @@ function App() {
 					<Play />
 				</Route>
 				<Route path="/scoreboard">
-					<Nav />
 					<Scoreboard />
 				</Route>
 				<Route path="/about">

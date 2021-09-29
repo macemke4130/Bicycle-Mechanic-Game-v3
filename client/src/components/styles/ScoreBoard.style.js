@@ -71,3 +71,11 @@ export const YouAreLoser = styled.div`
         100% {font-size: 2em;}
     }
 `;
+
+export const InputName = styled.input`
+    font-family: ${font};
+    font-size: 1.25em;
+    padding: 0.25em;
+    margin: 0.25em;
+    text-align: center;
+`;

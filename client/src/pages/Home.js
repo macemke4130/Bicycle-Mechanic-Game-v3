@@ -21,23 +21,27 @@ const Home = () => {
     useEffect(() => {
         (async () => {
             if (gateOpen) {
-                setGateOpen(false);
+                try {
+                    setGateOpen(false);
 
-                const partIdToFetch = 6; // Rotor Lock Washer --
+                    const partIdToFetch = 6; // Rotor Lock Washer --
 
-                const r = await gql(` { photo (part_id: ${partIdToFetch}) { id, filename } } `);
+                    const r = await gql(` { photo (part_id: ${partIdToFetch}) { id, filename } } `);
 
-                let formattedPhotos = [];
-                for (let i = 0; i < r.photo.length; i++) {
-                    let myObject = { id: null, filename: null };
-                    const myPic = images(`./${r.photo[i].filename}.jpg`);
-                    myObject.id = r.photo[i].id;
-                    myObject.filename = myPic.default;
-                    formattedPhotos[i] = myObject;
+                    let formattedPhotos = [];
+                    for (let i = 0; i < r.photo.length; i++) {
+                        let myObject = { id: null, filename: null };
+                        const myPic = images(`./${r.photo[i].filename}.jpg`);
+                        myObject.id = r.photo[i].id;
+                        myObject.filename = myPic.default;
+                        formattedPhotos[i] = myObject;
+                    }
+                    setPhotos(formattedPhotos);
+                    getTotalParts();
+                    setLoading(false);
+                } catch (e) {
+                    console.error(e);
                 }
-                setPhotos(formattedPhotos);
-                getTotalParts();
-                setLoading(false);
             }
         })()
     });
