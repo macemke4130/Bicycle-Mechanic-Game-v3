@@ -70,12 +70,12 @@ const Home = () => {
                 <ListItem>An incorrect answer will end the game</ListItem>
                 <ListItem>Have fun and try to beat your friend's score!</ListItem>
             </HowToPlayList>
-            {partCount && <Para>There are currently {partCount} parts in the game and I add more all the time!</Para>}
-            <Link to="/play" style={{ textDecoration: 'none' }}>
-                <StartGameButton><StartGameButtonTitle>Start Game!</StartGameButtonTitle></StartGameButton>
-            </Link>
+            {partCount && <Para>There are currently {partCount} parts in the game and I add more every week.</Para>}
             <CenteredRowContainer>
                 <Link to="/scoreboard" style={{ textDecoration: 'none' }}><NavLink>Scoreboard</NavLink></Link>
+                <Link to="/play" style={{ textDecoration: 'none' }}>
+                    <StartGameButton><StartGameButtonTitle>Start Game!</StartGameButtonTitle></StartGameButton>
+                </Link>
                 <Link to="/about" style={{ textDecoration: 'none' }}><NavLink>About</NavLink></Link>
             </CenteredRowContainer>
         </CenteredColContainer>

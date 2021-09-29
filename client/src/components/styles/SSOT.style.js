@@ -11,6 +11,7 @@ export const CenteredColContainer = styled.div`
 export const CenteredRowContainer = styled.div`
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-evenly;
     width: 100%;
 `;
