@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Play from "./pages/Play";
 import About from "./pages/About";
 import Scoreboard from "./pages/Scoreboard";
+import NewPart from './pages/NewPart';
 
 function App() {
 	return (
@@ -21,6 +22,9 @@ function App() {
 				</Route>
 				<Route path="/about">
 					<About />
+				</Route>
+				<Route path="/newpart">
+					<NewPart />
 				</Route>
 			</Switch>
 		</Router>

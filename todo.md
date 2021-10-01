@@ -1,16 +1,18 @@
 - Play
     - "Loading" image or text when part photo is not loaded yet
 - Images
-    - Shirink File Size 1000px accross
+    - ShirinSk File Size 1000px accross
 - Nav
     - Format
     - Look up the thing that doesn't display the link for the page you're on
 - Mobile
     - Shrink photos and stack them for small screens?
 - Scoreboard Page
-    - Input name maximum name length
 - About
     - Donate
     - Credits
     - Hire Me
 - Home Page
+- Admin
+    - Add part to game admin page
+    - I need auth
