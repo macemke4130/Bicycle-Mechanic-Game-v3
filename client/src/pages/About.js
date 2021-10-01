@@ -34,7 +34,7 @@ const About = () => {
                 your resume, please go right ahead! 
             </Para>
             <Para>If you enjoy the game, please share it with your bicycle nerd friends.</Para>
-            <Para>This project is funded completely on my own.</Para>
+            <Para>This project is funded completely by myself and maintained in my spare time.</Para>
             <Para>- Lucas</Para>
 
         </CenteredColContainer>

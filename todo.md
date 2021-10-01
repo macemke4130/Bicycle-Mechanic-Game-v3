@@ -16,3 +16,4 @@
 - Admin
     - Add part to game admin page
     - I need auth
+    - Add spinner to submitNewPart function
