@@ -4,7 +4,7 @@ import { CenterPara } from './styles/SSOT.style';
 import { InputName } from './styles/ScoreBoard.style';
 
 const InputHighScore = (props) => {
-    
+
     const handleName = (e) => {
        props.setWinnerName(e.target.value);
     }

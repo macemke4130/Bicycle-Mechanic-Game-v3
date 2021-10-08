@@ -36,7 +36,13 @@ const Play = () => {
     const [resetTimer, setResetTimer] = useState(false);
     const [winnerName, setWinnerName] = useState("");
     const [gamePlay, setGamePlay] = useState(true);
-    
+
+    const [statsGate, setStatsGate] = useState(true);
+    const [selectionLost, setSelectionLost] = useState(null);
+    const [timeoverLost, setTimeoverLost] = useState(null);
+    const [answerSpeed, setAnswerSpeed] = useState(null);
+    const [mouseOverEvents, setMouseOverEvents] = useState(null);
+
     const pointDrop = 25; // Points that drop per timer interval --
 
     const history = useHistory();
@@ -124,7 +130,7 @@ const Play = () => {
             setPoints(500);
             getNext();
         } else {
-            gameLost();
+            gameLost("selection");
         }
     }
 
@@ -139,7 +145,7 @@ const Play = () => {
 
         setPoints(pointsFromTimer);
         setResetTimer(false);
-        if (points <= pointDrop) gameLost();
+        if (points <= pointDrop) gameLost("timeover");
     }
 
     const gameWin = () => {
@@ -149,11 +155,59 @@ const Play = () => {
         setGamePlay(false);
     }
 
-    const gameLost = () => {
+    const gameLost = (type) => {
         // Time over or wrong answer submitted --
 
+        switch (type) {
+            case "timeover":
+                setTimeoverLost(true);
+                break;
+            case "selection":
+                setSelectionLost(true);
+                break;
+            default:
+                break;
+        }
         setGamePlay(false);
     }
+
+    const setStats = async () => {
+        // Sets stats in the database --
+
+
+    }
+
+    useEffect(() => {
+        // Sets stats of game to DB when gameplay ends --
+
+        if (statsGate && gamePlay === false) {
+            setStatsGate(false);
+            (async () => {
+                console.log("SetStats");
+
+                const correctAnswers = winner ? index : index - 1;
+                const gametimeLength = 15; // Placeholder --
+                const mouseOverEvents = 25; // Placeholder --
+                const answerSpeed = 4.6; // Placeholder --
+
+                try {
+                    const r = await gql(` mutation { 
+                setStats(
+                    won: ${winner},
+                    selectionlost: ${selectionLost},
+                    timeoverlost: ${timeoverLost},
+                    correctanswers: ${correctAnswers},
+                    answerspeed: ${answerSpeed},
+                    gametimelength: ${gametimeLength},
+                    mouseoverevents: ${mouseOverEvents}
+                ) { insertId } } `);
+                    console.log(r);
+                } catch (e) {
+                    console.error(e);
+                }
+            })();
+        }
+    }, [gamePlay, statsGate, index, selectionLost, timeoverLost, winner]);
 
     const refeshHighScore = () => {
         // Refreshes the scoreboard component when user enters their name
@@ -167,20 +221,35 @@ const Play = () => {
     const submitHighScoreName = async () => {
         // Inputs new high score to the database --
 
-        try {
-            const r = await gql(` mutation { updateHighScore( 
-                    name: "${winnerName}", 
-                    totalScore: ${totalScore}, 
-                    club100: ${club100}, 
-                    club100num: ${club100num}
-                    ) {
-                      insertId
-                    }
-                  }`);
-            if (r) refeshHighScore();
-        } catch (e) {
-            console.error(e);
+        const check = validateName();
+
+        if (check) {
+            try {
+                const r = await gql(` mutation { updateHighScore( 
+                        name: "${winnerName}", 
+                        totalScore: ${totalScore}, 
+                        club100: ${club100}, 
+                        club100num: ${club100num}
+                        ) {
+                          insertId
+                        }
+                      }`);
+                if (r) refeshHighScore();
+            } catch (e) {
+                console.error(e);
+            }
         }
+    }
+
+    const validateName = () => {
+        // Validates user's name for scoreboard --
+        // This could be much cleaner wiht some regex --
+
+        if (winnerName === "") return false;
+        if (winnerName === " ") return false;
+        if (winnerName === "  ") return false;
+        if (winnerName === "   ") return false;
+        return true;
     }
 
     useEffect(() => {

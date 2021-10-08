@@ -1,13 +1,13 @@
 - Play
     - "Loading" image or text when part photo is not loaded yet
-- Images
-    - ShirinSk File Size 1000px accross
 - Nav
     - Format
     - Look up the thing that doesn't display the link for the page you're on
 - Mobile
-    - Shrink photos and stack them for small screens?
+    - Shrink photos and stack them for small screens
 - Scoreboard Page
+    - Add comma for thousands
+    - 100 Club Logic
 - About
     - Donate
     - Credits

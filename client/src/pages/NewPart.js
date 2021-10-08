@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import { CenteredColContainer } from '../components/styles/SSOT.style';
 
@@ -11,14 +10,12 @@ const NewPart = () => {
     const [lose1, setLose1] = useState("");
     const [lose2, setLose2] = useState("");
     const [lose3, setLose3] = useState("");
-    const [photo1, setPhoto1] = useState(0);
-    const [photo2, setPhoto2] = useState(0);
+    const [photo1, setPhoto1] = useState("");
+    const [photo2, setPhoto2] = useState("");
     const [newPartId, setNewPartId] = useState(null);
     const [newPhoto1Id, setNewPhoto1Id] = useState(null);
     const [newPhoto2Id, setNewPhoto2Id] = useState(null);
     const [feedback, setFeedback] = useState(null);
-
-    const history = useHistory();
 
     const handleWin = (e) => {
         setWin(e.target.value);
@@ -65,9 +62,17 @@ const NewPart = () => {
     }
 
     const handleRefresh = () => {
-        // Refesh page to insert another part --
+        // Clear inputs to insert another part --
 
-        history.go(0);
+        setWin("");
+        setLose1("");
+        setLose2("");
+        setLose3("");
+        setPhoto1("");
+        setPhoto2("");
+        setNewPartId("");
+        setNewPhoto1Id("");
+        setNewPhoto2Id("");
     }
 
     useEffect(() => {
@@ -78,12 +83,12 @@ const NewPart = () => {
 
     return (
         <CenteredColContainer>
-            <div><label>Win: </label><input type="text" onChange={handleWin} /></div>
-            <div><label>Lose 1: </label><input type="text" onChange={handleLose1} /></div>
-            <div><label>Lose 2: </label><input type="text" onChange={handleLose2} /></div>
-            <div><label>Lose 3: </label><input type="text" onChange={handleLose3} /></div>
-            <div><label>Photo 1: </label><input type="text" onChange={handlePhoto1} /></div>
-            <div><label>Photo 2: </label><input type="text" onChange={handlePhoto2} /></div>
+            <div><label>Win: </label><input type="text" onChange={handleWin} value={win} /></div>
+            <div><label>Lose 1: </label><input type="text" onChange={handleLose1} value={lose1} /></div>
+            <div><label>Lose 2: </label><input type="text" onChange={handleLose2} value={lose2} /></div>
+            <div><label>Lose 3: </label><input type="text" onChange={handleLose3} value={lose3} /></div>
+            <div><label>Photo 1: </label><input type="text" onChange={handlePhoto1} value={photo1} /></div>
+            <div><label>Photo 2: </label><input type="text" onChange={handlePhoto2} value={photo2} /></div>
             <button onClick={submitNewPart}>New Part</button>
             <p>New Part ID: {newPartId}</p>
             <p>New Photo ID 1: {newPhoto1Id}</p>
