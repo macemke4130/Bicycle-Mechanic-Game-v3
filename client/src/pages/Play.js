@@ -40,8 +40,9 @@ const Play = () => {
     const [statsGate, setStatsGate] = useState(true);
     const [selectionLost, setSelectionLost] = useState(null);
     const [timeoverLost, setTimeoverLost] = useState(null);
-    const [answerSpeed, setAnswerSpeed] = useState(null);
-    const [mouseOverEvents, setMouseOverEvents] = useState(null);
+    // const [totalSeconds, setTotalSeconds] = useState(0);
+    // const [answerSpeed, setAnswerSpeed] = useState(null);
+    const [mouseOverEvents, setMouseOverEvents] = useState(0);
 
     const pointDrop = 25; // Points that drop per timer interval --
 
@@ -171,44 +172,6 @@ const Play = () => {
         setGamePlay(false);
     }
 
-    const setStats = async () => {
-        // Sets stats in the database --
-
-
-    }
-
-    useEffect(() => {
-        // Sets stats of game to DB when gameplay ends --
-
-        if (statsGate && gamePlay === false) {
-            setStatsGate(false);
-            (async () => {
-                console.log("SetStats");
-
-                const correctAnswers = winner ? index : index - 1;
-                const gametimeLength = 15; // Placeholder --
-                const mouseOverEvents = 25; // Placeholder --
-                const answerSpeed = 4.6; // Placeholder --
-
-                try {
-                    const r = await gql(` mutation { 
-                setStats(
-                    won: ${winner},
-                    selectionlost: ${selectionLost},
-                    timeoverlost: ${timeoverLost},
-                    correctanswers: ${correctAnswers},
-                    answerspeed: ${answerSpeed},
-                    gametimelength: ${gametimeLength},
-                    mouseoverevents: ${mouseOverEvents}
-                ) { insertId } } `);
-                    console.log(r);
-                } catch (e) {
-                    console.error(e);
-                }
-            })();
-        }
-    }, [gamePlay, statsGate, index, selectionLost, timeoverLost, winner]);
-
     const refeshHighScore = () => {
         // Refreshes the scoreboard component when user enters their name
         // and unmounts the input field --
@@ -305,7 +268,37 @@ const Play = () => {
                 }
             })()
         }
-    }, [gamePlay, totalScore])
+    }, [gamePlay, totalScore]);
+
+    useEffect(() => {
+        // Sets stats of game to DB when gameplay ends --
+
+        if (statsGate && gamePlay === false) {
+            setStatsGate(false);
+            (async () => {
+                const correctAnswers = winner ? index : index - 1;
+                const gametimeLength = null; // Placeholder --
+                const answerSpeed = null; // Placeholder --
+
+                try {
+                    const r = await gql(` mutation { 
+                setStats(
+                    won: ${winner},
+                    selectionlost: ${selectionLost},
+                    timeoverlost: ${timeoverLost},
+                    correctanswers: ${correctAnswers},
+                    totalscore: ${totalScore},
+                    answerspeed: ${answerSpeed},
+                    gametimelength: ${gametimeLength},
+                    mouseoverevents: ${mouseOverEvents}
+                ) { insertId } } `);
+                if (r) console.log("Try Again!");
+                } catch (e) {
+                    console.error(e);
+                }
+            })();
+        }
+    }, [gamePlay, statsGate, index, selectionLost, timeoverLost, winner, totalScore, mouseOverEvents]);
 
     useEffect(() => {
         // Run Program --
@@ -323,6 +316,11 @@ const Play = () => {
         e.target.blur();
     }
 
+    const handleHover = () => {
+        // Counts number of times user mouses over a different selection --
+        setMouseOverEvents(mouseOverEvents + 1);
+    }
+
     if (loading) return <Loading />;
 
     if (gamePlay) {
@@ -336,7 +334,7 @@ const Play = () => {
 
                 {answers?.map(answer => (
                     <AnswerDiv key={answer.id}>
-                        <Button key={answer.id} tabIndex="-1" onFocus={handleFocus} onKeyUp={handleEnterKey} onKeyDown={handleEnterKey} onKeyPress={handleEnterKey} onSubmit={handleEnterKey} onClick={handleChoice}>{answer.name}</Button>
+                        <Button key={answer.id} tabIndex="-1" onFocus={handleFocus} onKeyUp={handleEnterKey} onKeyDown={handleEnterKey} onKeyPress={handleEnterKey} onSubmit={handleEnterKey} onClick={handleChoice} onMouseOver={handleHover}>{answer.name}</Button>
                     </AnswerDiv>
                 ))}
 

@@ -17,3 +17,7 @@
     - Add part to game admin page
     - I need auth
     - Add spinner to submitNewPart function
+- Stats
+    - Game Length in Seconds Counter
+    - Average time to answer Logic
+    - Mouse Over Events Logic
