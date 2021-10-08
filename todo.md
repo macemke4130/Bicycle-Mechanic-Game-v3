@@ -21,3 +21,6 @@
     - Game Length in Seconds Counter
     - Average time to answer Logic
     - Mouse Over Events Logic
+    - Log into stats the order of their part array?
+    - Output stats data to table on admin page
+    - MouseOverEvents counter needs to be useRef or something because useState causes the timer to pause

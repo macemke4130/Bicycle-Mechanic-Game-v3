@@ -40,9 +40,10 @@ const Play = () => {
     const [statsGate, setStatsGate] = useState(true);
     const [selectionLost, setSelectionLost] = useState(null);
     const [timeoverLost, setTimeoverLost] = useState(null);
+    const [totalGameSeconds, setTotalGameSeconds] = useState(0);
     // const [totalSeconds, setTotalSeconds] = useState(0);
     // const [answerSpeed, setAnswerSpeed] = useState(null);
-    const [mouseOverEvents, setMouseOverEvents] = useState(0);
+    // const [mouseOverEvents, setMouseOverEvents] = useState(0);
 
     const pointDrop = 25; // Points that drop per timer interval --
 
@@ -147,6 +148,10 @@ const Play = () => {
         setPoints(pointsFromTimer);
         setResetTimer(false);
         if (points <= pointDrop) gameLost("timeover");
+    }
+
+    const updateGameSeconds = (secondsFromTimer) => {
+        setTotalGameSeconds(secondsFromTimer);
     }
 
     const gameWin = () => {
@@ -277,8 +282,9 @@ const Play = () => {
             setStatsGate(false);
             (async () => {
                 const correctAnswers = winner ? index : index - 1;
-                const gametimeLength = null; // Placeholder --
-                const answerSpeed = null; // Placeholder --
+                const answerSpeed = totalGameSeconds / correctAnswers; // Placeholder --
+                console.log(answerSpeed);
+                const mouseOverEvents = null; // Placeholder --
 
                 try {
                     const r = await gql(` mutation { 
@@ -288,8 +294,8 @@ const Play = () => {
                     timeoverlost: ${timeoverLost},
                     correctanswers: ${correctAnswers},
                     totalscore: ${totalScore},
-                    answerspeed: ${answerSpeed},
-                    gametimelength: ${gametimeLength},
+                    answerspeed: ${answerSpeed.toFixed(2)},
+                    gametimelength: ${totalGameSeconds},
                     mouseoverevents: ${mouseOverEvents}
                 ) { insertId } } `);
                 if (r) console.log("Try Again!");
@@ -298,7 +304,7 @@ const Play = () => {
                 }
             })();
         }
-    }, [gamePlay, statsGate, index, selectionLost, timeoverLost, winner, totalScore, mouseOverEvents]);
+    }, [gamePlay, statsGate, index, selectionLost, timeoverLost, winner, totalScore, totalGameSeconds]);
 
     useEffect(() => {
         // Run Program --
@@ -318,7 +324,7 @@ const Play = () => {
 
     const handleHover = () => {
         // Counts number of times user mouses over a different selection --
-        setMouseOverEvents(mouseOverEvents + 1);
+        // setMouseOverEvents(mouseOverEvents + 1);
     }
 
     if (loading) return <Loading />;
@@ -339,7 +345,7 @@ const Play = () => {
                 ))}
 
                 <Feedback>
-                    <Timer points={points} updatePoints={updatePoints} resetTimer={resetTimer} pointDrop={pointDrop} />
+                    <Timer points={points} updatePoints={updatePoints} updateGameSeconds={updateGameSeconds} resetTimer={resetTimer} pointDrop={pointDrop} />
                     <P>Total Score: {totalScore}</P>
                 </Feedback>
 
