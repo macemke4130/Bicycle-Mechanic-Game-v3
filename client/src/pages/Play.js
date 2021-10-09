@@ -366,7 +366,7 @@ const Play = () => {
                     <StartGameButton onClick={handlePlayAgain}>
                         <StartGameButtonTitle>Play Again?</StartGameButtonTitle>
                     </StartGameButton>
-                    <HeadlineOne>Total Score: {totalScore}</HeadlineOne>
+                    <HeadlineOne>Total Score: {totalScore.toLocaleString()}</HeadlineOne>
                     {inTopTen && <InputHighScore submitHighScoreName={submitHighScoreName} setWinnerName={setWinnerName} />}
                 </CenteredColContainer>
                 {highScoreDisplay && <ScoreboardDisplay refeshHighScore={refeshHighScore} />}
