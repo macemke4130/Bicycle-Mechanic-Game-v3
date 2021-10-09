@@ -8,6 +8,7 @@
 - Scoreboard Page
     - Add comma for thousands
     - 100 Club Logic
+    - Nathan - 100% at 46 Parts
 - About
     - Donate
     - Credits
@@ -23,4 +24,6 @@
     - Mouse Over Events Logic
     - Log into stats the order of their part array?
     - Output stats data to table on admin page
+    - Add stats table to live version DB
     - MouseOverEvents counter needs to be useRef or something because useState causes the timer to pause
+    - Would it be easier to log local start time and local end time and subtract rather than bother with a timer logic?

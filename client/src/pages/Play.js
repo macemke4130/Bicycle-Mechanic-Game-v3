@@ -41,8 +41,6 @@ const Play = () => {
     const [selectionLost, setSelectionLost] = useState(null);
     const [timeoverLost, setTimeoverLost] = useState(null);
     const [totalGameSeconds, setTotalGameSeconds] = useState(0);
-    // const [totalSeconds, setTotalSeconds] = useState(0);
-    // const [answerSpeed, setAnswerSpeed] = useState(null);
     // const [mouseOverEvents, setMouseOverEvents] = useState(0);
 
     const pointDrop = 25; // Points that drop per timer interval --
@@ -282,8 +280,7 @@ const Play = () => {
             setStatsGate(false);
             (async () => {
                 const correctAnswers = winner ? index : index - 1;
-                const answerSpeed = totalGameSeconds / correctAnswers; // Placeholder --
-                console.log(answerSpeed);
+                const answerSpeed = totalGameSeconds / correctAnswers;
                 const mouseOverEvents = null; // Placeholder --
 
                 try {
