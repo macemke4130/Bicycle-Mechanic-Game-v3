@@ -39,7 +39,8 @@ const Scoreboard = () => {
                 highScores?.map(score => (
                     <HighScoreDiv key={score.id}>
                         <Name>{score.name}</Name>
-                        <TotalScore>{score.totalscore}</TotalScore>
+
+                        <TotalScore>{score.totalscore} {score.club100 && ` - 100% at ${score.club100num} parts` }</TotalScore>
                         <ScoreDate>{score.scoredate}</ScoreDate>
                     </HighScoreDiv>
                 ))
