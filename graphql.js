@@ -37,7 +37,7 @@ export const schema = buildSchema(`
   type HighScore {
     id: Int
     name: String
-    totalscore: Int
+    totalscore: String
     club100: Boolean
     club100num: Int
     scoredate: String
@@ -88,6 +88,9 @@ export const root = {
     for (let i = 0; i < r.length; i++) {
       const dateFormat = dayjs(r[i].scoredate).format("MMM DD, YYYY");
       r[i].scoredate = dateFormat;
+      
+      // Adds commas to total score for thousands --
+      r[i].totalscore = r[i].totalscore.toLocaleString();
     }
     return r;
   },

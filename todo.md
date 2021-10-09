@@ -7,8 +7,6 @@
     - Shrink photos and stack them for small screens
 - Scoreboard Page
     - Add comma for thousands
-    - 100 Club Logic
-    - Nathan - 100% at 46 Parts
 - About
     - Donate
     - Credits
