@@ -15,7 +15,7 @@ export const Button = styled.button`
     border: 1px solid black;
     border-radius: 0.5em;
 
-    /* Prevents mobile highlight correct answer */
+    /* Prevents mobile highlight on correct answer */
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     -webkit-tap-highlight-color: transparent;
 
@@ -40,7 +40,8 @@ export const PartImg = styled.img`
 
     @media (max-width: ${screenSize}) {
         height: 25vh;
-        width: auto;
+        width: fit-content;
+        align-self: center;
     }
 `;
 
@@ -50,7 +51,7 @@ export const PhotoContainer = styled.div`
     justify-content: center;
 
     @media (max-width: ${screenSize}) {
-        display: block;
+        display: flex;
         flex-direction: column;
         align-content: center;
     }
