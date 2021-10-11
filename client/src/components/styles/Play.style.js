@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { font } from './SSOT.style';
 
-const screenSize = "768px";
+const screenSize = "800px";
 
 export const Button = styled.button`
     font-family: ${font};
