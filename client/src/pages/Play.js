@@ -342,7 +342,7 @@ const Play = () => {
                 ))}
 
                 <Feedback>
-                    {/* <Timer points={points} updatePoints={updatePoints} updateGameSeconds={updateGameSeconds} resetTimer={resetTimer} pointDrop={pointDrop} /> */}
+                    <Timer points={points} updatePoints={updatePoints} updateGameSeconds={updateGameSeconds} resetTimer={resetTimer} pointDrop={pointDrop} />
                     <P>Total Score: {totalScore}</P>
                 </Feedback>
 
