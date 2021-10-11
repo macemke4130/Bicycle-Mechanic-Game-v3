@@ -15,6 +15,10 @@ export const Button = styled.button`
     border: 1px solid black;
     border-radius: 0.5em;
 
+    /* Prevents mobile highlight correct answer */
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent;
+
     &:hover{
         cursor: pointer;
     }
