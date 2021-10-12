@@ -65,7 +65,7 @@ const GetStats = () => {
                             <TableData><span>{stat.answerspeed}</span></TableData>
                             <TableData><span>{stat.gametimelength}</span></TableData>
                             {/* <TableData><span>{stat.mouseoverevents}</span></TableData> */}
-                            <TableData><span>{stat.mobile}</span></TableData>
+                            <TableData><span>{stat.mobile ? "True" : "False"}</span></TableData>
                             <TableData><span>{stat.browser}</span></TableData>
                             <TableData><span>{stat.datetimeplayed}</span></TableData>
                         </TableRow>
