@@ -113,7 +113,7 @@ export const root = {
     const r = await query("select * from stats order by id desc");
 
     for (let i = 0; i < r.length; i++) {
-      const dateFormat = dayjs(r[i].datetimeplayed).format("MMM DD, YYYY h:MMa");
+      const dateFormat = dayjs(r[i].datetimeplayed).format("MMM DD, YYYY h:mma");
       r[i].datetimeplayed = dateFormat;
     }
 
