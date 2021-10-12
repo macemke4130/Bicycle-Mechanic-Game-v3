@@ -18,7 +18,7 @@ export const schema = buildSchema(`
     updateHighScore(name: String, totalScore: Int, club100: Boolean, club100num: Int): mysqlResponse
     newPart(win: String, lose1: String, lose2: String, lose3: String): mysqlResponse
     newPhotos(part_id: Int, filename1: String, filename2: String): photoReturnObject
-    setStats(won: Boolean, selectionlost: Boolean, timeoverlost: Boolean, correctanswers: Int, totalscore: Int, answerspeed: Float, gametimelength: Int, mouseoverevents: Int): mysqlResponse
+    setStats(won: Boolean, selectionlost: Boolean, timeoverlost: Boolean, correctanswers: Int, totalscore: Int, answerspeed: Float, gametimelength: Int, mouseoverevents: Int, mobile: Boolean, browser: String): mysqlResponse
   }
 
   type Part {
@@ -71,6 +71,8 @@ export const schema = buildSchema(`
     answerspeed: Float
     gametimelength: Int
     mouseoverevents: Int
+    mobile: Boolean
+    browser: String
     datetimeplayed: String
   }
 

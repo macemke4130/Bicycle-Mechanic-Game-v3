@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
+import { isMobile, browserName } from 'react-device-detect';
 
 import { gql } from '../utils/gql';
 
@@ -280,8 +281,10 @@ const Play = () => {
             setStatsGate(false);
             (async () => {
                 const correctAnswers = winner ? index : index - 1;
-                const answerSpeed = totalGameSeconds / correctAnswers;
+                let answerSpeed = totalGameSeconds / correctAnswers;
+                if (isNaN(answerSpeed) || answerSpeed === Infinity) answerSpeed = 0;
                 const mouseOverEvents = null; // Placeholder --
+                const theBrowser = browserName.toString();
 
                 try {
                     const r = await gql(` mutation { 
@@ -293,7 +296,9 @@ const Play = () => {
                     totalscore: ${totalScore},
                     answerspeed: ${answerSpeed.toFixed(2)},
                     gametimelength: ${totalGameSeconds},
-                    mouseoverevents: ${mouseOverEvents}
+                    mouseoverevents: ${mouseOverEvents},
+                    mobile: ${isMobile},
+                    browser: "${theBrowser}"
                 ) { insertId } } `);
                 if (r) console.log("Try Again!");
                 } catch (e) {

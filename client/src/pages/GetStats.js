@@ -26,6 +26,8 @@ const GetStats = () => {
                         answerspeed,
                         gametimelength,
                         mouseoverevents,
+                        mobile,
+                        browser,
                         datetimeplayed
                     }}`);
                     setAllStats(r.getStats);
@@ -47,6 +49,8 @@ const GetStats = () => {
                         <TableHeader>Answer Speed</TableHeader>
                         <TableHeader>Game Seconds</TableHeader>
                         {/* <TableHeader>Mouse Overs</TableHeader> */}
+                        <TableHeader>Mobile</TableHeader>
+                        <TableHeader>Browser</TableHeader>
                         <TableHeader>Time</TableHeader>
                     </TableRow>
                 </thead>
@@ -61,6 +65,8 @@ const GetStats = () => {
                             <TableData><span>{stat.answerspeed}</span></TableData>
                             <TableData><span>{stat.gametimelength}</span></TableData>
                             {/* <TableData><span>{stat.mouseoverevents}</span></TableData> */}
+                            <TableData><span>{stat.mobile}</span></TableData>
+                            <TableData><span>{stat.browser}</span></TableData>
                             <TableData><span>{stat.datetimeplayed}</span></TableData>
                         </TableRow>
                     ))}
