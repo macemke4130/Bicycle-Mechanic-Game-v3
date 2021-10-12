@@ -11,6 +11,7 @@ export const schema = buildSchema(`
     photo(part_id: Int!): [Photo]
     highscores: [HighScore]
     partCount: Int
+    getStats: [Stat]
   }
 
   type Mutation {
@@ -60,6 +61,19 @@ export const schema = buildSchema(`
     photo2: Int
   }
 
+  type Stat {
+    id: Int
+    won: Boolean
+    selectionlost: Boolean
+    timeoverlost: Boolean
+    correctanswers: Int
+    totalscore: Int
+    answerspeed: Float
+    gametimelength: Int
+    mouseoverevents: Int
+    datetimeplayed: String
+  }
+
 `);
 
 export const root = {
@@ -94,6 +108,16 @@ export const root = {
   partCount: async () => {
     const r = await query("select count(*) as 'parts' from parts");
     return r[0].parts;
+  },
+  getStats: async () => {
+    const r = await query("select * from stats order by id desc");
+
+    for (let i = 0; i < r.length; i++) {
+      const dateFormat = dayjs(r[i].datetimeplayed).format("MMM DD, YYYY h:MMa");
+      r[i].datetimeplayed = dateFormat;
+    }
+
+    return r;
   },
   // Mutations --
   updateHighScore: async (args) => {

@@ -6,6 +6,7 @@ import Play from "./pages/Play";
 import About from "./pages/About";
 import Scoreboard from "./pages/Scoreboard";
 import NewPart from './pages/NewPart';
+import GetStats from './pages/GetStats';
 
 function App() {
 	return (
@@ -25,6 +26,9 @@ function App() {
 				</Route>
 				<Route path="/newpart">
 					<NewPart />
+				</Route>
+				<Route path="/stats">
+					<GetStats />
 				</Route>
 			</Switch>
 		</Router>
