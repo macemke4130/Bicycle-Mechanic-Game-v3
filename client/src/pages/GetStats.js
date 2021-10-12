@@ -57,7 +57,7 @@ const GetStats = () => {
                                 {stat.selectionlost && <span>Selection Loss</span>}
                                 {stat.timeoverlost && <span>Time Out Loss</span>}</TableData>
                             <TableData><span>{stat.correctanswers}</span></TableData>
-                            <TableData><span>{stat.totalscore}</span></TableData>
+                            <TableData><span>{stat.totalscore.toLocaleString()}</span></TableData>
                             <TableData><span>{stat.answerspeed}</span></TableData>
                             <TableData><span>{stat.gametimelength}</span></TableData>
                             {/* <TableData><span>{stat.mouseoverevents}</span></TableData> */}
