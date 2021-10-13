@@ -284,7 +284,7 @@ const Play = () => {
                 let answerSpeed = totalGameSeconds / correctAnswers;
                 if (isNaN(answerSpeed) || answerSpeed === Infinity) answerSpeed = 0;
                 const mouseOverEvents = null; // Placeholder --
-                const theBrowser = browserName.toString();
+                const theBrowser = browserName;
 
                 try {
                     const r = await gql(` mutation { 

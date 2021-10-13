@@ -1,6 +1,11 @@
 import { buildSchema } from 'graphql';
 import { query } from "./dbconnect.js";
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc.js';
+import timezone from 'dayjs/plugin/timezone.js';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 export const schema = buildSchema(`
   type Query {
@@ -113,9 +118,9 @@ export const root = {
   },
   getStats: async () => {
     const r = await query("select * from stats order by id desc");
-
+    
     for (let i = 0; i < r.length; i++) {
-      const dateFormat = dayjs(r[i].datetimeplayed).format("MMM DD, YYYY h:mma");
+      const dateFormat = dayjs(r[i].datetimeplayed).tz("America/Chicago").format("MMM DD, YYYY h:mma");
       r[i].datetimeplayed = dateFormat;
     }
 
