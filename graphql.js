@@ -17,6 +17,7 @@ export const schema = buildSchema(`
     highscores: [HighScore]
     partCount: Int
     getStats: [Stat]
+    login(user: String, password: String): String
   }
 
   type Mutation {
@@ -24,6 +25,13 @@ export const schema = buildSchema(`
     newPart(win: String, lose1: String, lose2: String, lose3: String): mysqlResponse
     newPhotos(part_id: Int, filename1: String, filename2: String): photoReturnObject
     setStats(won: Boolean, selectionlost: Boolean, timeoverlost: Boolean, correctanswers: Int, totalscore: Int, answerspeed: Float, gametimelength: Int, mouseoverevents: Int, mobile: Boolean, browser: String): mysqlResponse
+  }
+
+  type User {
+    id: Int
+    user: String
+    password: String
+    admin: Boolean
   }
 
   type Part {
@@ -118,13 +126,26 @@ export const root = {
   },
   getStats: async () => {
     const r = await query("select * from stats order by id desc");
-    
     for (let i = 0; i < r.length; i++) {
       const dateFormat = dayjs(r[i].datetimeplayed).tz("America/Chicago").format("MMM DD, YYYY h:mma");
       r[i].datetimeplayed = dateFormat;
     }
-
     return r;
+  },
+  // Auth --
+  login: async (args) => {
+    const r = await query("select * from users where user = ?", [args.user]);
+    const dbUser = r[0].user;
+    const inputPassword = args.password;
+    const dbPassword = r[0].password;
+
+    if (inputPassword === dbPassword) {
+      return dbUser;
+    } else {
+      return null;
+    }
+
+    // return (inputPassword === dbPassword) ? r[0].user : null;
   },
   // Mutations --
   updateHighScore: async (args) => {

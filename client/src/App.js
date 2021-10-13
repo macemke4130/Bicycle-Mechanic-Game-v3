@@ -7,6 +7,7 @@ import About from "./pages/About";
 import Scoreboard from "./pages/Scoreboard";
 import NewPart from './pages/NewPart';
 import GetStats from './pages/GetStats';
+import Login from './pages/Login';
 
 function App() {
 	return (
@@ -29,6 +30,9 @@ function App() {
 				</Route>
 				<Route path="/stats">
 					<GetStats />
+				</Route>
+				<Route path="/login">
+					<Login />
 				</Route>
 			</Switch>
 		</Router>
