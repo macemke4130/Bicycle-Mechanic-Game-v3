@@ -14,12 +14,12 @@ export const TableHeader = styled.th`
 export const TableRow = styled.tr`
     background-color: white;
 
-    &:hover{
-        background-color: lightblue;
-    }
-
     &:nth-of-type(even) {
         background-color: #f2f2f2;
+    }
+
+    &:hover{
+        background-color: lightblue;
     }
 `;
 
