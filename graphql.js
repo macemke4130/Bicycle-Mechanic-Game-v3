@@ -88,6 +88,9 @@ export const schema = buildSchema(`
     mouseoverevents: Int
     mobile: Boolean
     browser: String
+    city: String
+    region: String
+    country: String
     datetimeplayed: String
   }
 

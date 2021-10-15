@@ -290,13 +290,9 @@ const Play = () => {
 
                 let userIP;
                 try {
-                    // const r = await gql(` { userIP } `);
-                    // userIP = r.userIP;
                     const r = await fetch("https://api.ipify.org/?format=json");
                     const tempIP = await r.json();
                     userIP = tempIP.ip;
-
-                    console.log(userIP);
                 } catch (e) {
                     console.error(e);
                 }
@@ -310,7 +306,7 @@ const Play = () => {
                     region = r.regionName;
                     country = r.country;
                 } catch(e) {
-
+                    console.error(e);
                 }
 
                 try {

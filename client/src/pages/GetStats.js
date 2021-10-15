@@ -28,6 +28,9 @@ const GetStats = () => {
                         mouseoverevents,
                         mobile,
                         browser,
+                        city,
+                        region,
+                        country,
                         datetimeplayed
                     }}`);
                     setAllStats(r.getStats);
@@ -51,7 +54,9 @@ const GetStats = () => {
                         {/* <TableHeader>Mouse Overs</TableHeader> */}
                         <TableHeader>Mobile</TableHeader>
                         <TableHeader>Browser</TableHeader>
-                        <TableHeader>Time</TableHeader>
+                        <TableHeader>City</TableHeader>
+                        <TableHeader>Region</TableHeader>
+                        <TableHeader>Central Time</TableHeader>
                     </TableRow>
                 </thead>
                 <tbody>
@@ -67,6 +72,8 @@ const GetStats = () => {
                             {/* <TableData><span>{stat.mouseoverevents}</span></TableData> */}
                             <TableData><span>{stat.mobile ? "True" : "False"}</span></TableData>
                             <TableData><span>{stat.browser}</span></TableData>
+                            <TableData><span>{stat.city === "undefined" ? "" : stat.city}</span></TableData>
+                            <TableData><span>{stat.region === "undefined" ? "" : stat.region}</span></TableData>
                             <TableData><span>{stat.datetimeplayed}</span></TableData>
                         </TableRow>
                     ))}
