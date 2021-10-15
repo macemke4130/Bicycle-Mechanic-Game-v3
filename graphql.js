@@ -135,7 +135,7 @@ export const root = {
     return r;
   },
   userIP: async () => {
-    const userIPAddress = await publicIp.v6();
+    const userIPAddress = await publicIp.v4();
     return userIPAddress;
   },
   // Auth --
