@@ -293,9 +293,10 @@ const Play = () => {
                     // const r = await gql(` { userIP } `);
                     // userIP = r.userIP;
                     const r = await fetch("https://api.ipify.org/?format=json");
-                    userIP = await r.json();
+                    const tempIP = await r.json();
+                    userIP = tempIP.ip;
 
-                    // console.log(userIP);
+                    console.log(userIP);
                 } catch (e) {
                     console.error(e);
                 }
