@@ -212,7 +212,7 @@ const Play = () => {
 
     const validateName = () => {
         // Validates user's name for scoreboard --
-        // This could be much cleaner wiht some regex --
+        // This could be much cleaner with some regex --
 
         if (winnerName === "") return false;
         if (winnerName === " ") return false;
@@ -292,6 +292,7 @@ const Play = () => {
                 try {
                     const r = await gql(` { userIP } `);
                     userIP = r.userIP;
+                    console.log(userIP);
                 } catch (e) {
                     console.error(e);
                 }
