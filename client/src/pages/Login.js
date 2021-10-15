@@ -19,8 +19,12 @@ const Login = () => {
     }
 
     const handleSubmit = async () => {
-        const r = await gql(` login (user: "${user}", password: "${password}") {user} `);
-        console.log(r);
+        try {
+            const r = await gql(` { login(user: "${user}", password: "${password}") } `);
+            if (r.login === user) console.log("Success!");
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     return (

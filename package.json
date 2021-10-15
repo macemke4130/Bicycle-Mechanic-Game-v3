@@ -14,8 +14,10 @@
     "express": "^4.17.1",
     "express-graphql": "^0.12.0",
     "graphql": "^15.6.0",
+    "ip-info-finder": "^1.1.5",
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "public-ip": "^4.0.4"
   },
   "type": "module"
 }

@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { isMobile, browserName } from 'react-device-detect';
 
+import ipInfo from 'ip-info-finder';
+
 import { gql } from '../utils/gql';
 
 import Timer from '../components/Timer';
@@ -286,6 +288,26 @@ const Play = () => {
                 const mouseOverEvents = null; // Placeholder --
                 const theBrowser = browserName;
 
+                let userIP;
+                try {
+                    const r = await gql(` { userIP } `);
+                    userIP = r.userIP;
+                } catch (e) {
+                    console.error(e);
+                }
+
+                let city;
+                let region;
+                let country;
+                try {
+                    const r = await ipInfo.getIPInfo(userIP);
+                    city = r.city;
+                    region = r.regionName;
+                    country = r.country;
+                } catch(e) {
+
+                }
+
                 try {
                     const r = await gql(` mutation { 
                 setStats(
@@ -298,7 +320,10 @@ const Play = () => {
                     gametimelength: ${totalGameSeconds},
                     mouseoverevents: ${mouseOverEvents},
                     mobile: ${isMobile},
-                    browser: "${theBrowser}"
+                    browser: "${theBrowser}",
+                    city: "${city}",
+                    region: "${region}",
+                    country: "${country}"
                 ) { insertId } } `);
                 if (r) console.log("Try Again!");
                 } catch (e) {

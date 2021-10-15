@@ -3,6 +3,7 @@ import { query } from "./dbconnect.js";
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc.js';
 import timezone from 'dayjs/plugin/timezone.js';
+import publicIp from 'public-ip';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -18,13 +19,14 @@ export const schema = buildSchema(`
     partCount: Int
     getStats: [Stat]
     login(user: String, password: String): String
+    userIP: String
   }
 
   type Mutation {
     updateHighScore(name: String, totalScore: Int, club100: Boolean, club100num: Int): mysqlResponse
     newPart(win: String, lose1: String, lose2: String, lose3: String): mysqlResponse
     newPhotos(part_id: Int, filename1: String, filename2: String): photoReturnObject
-    setStats(won: Boolean, selectionlost: Boolean, timeoverlost: Boolean, correctanswers: Int, totalscore: Int, answerspeed: Float, gametimelength: Int, mouseoverevents: Int, mobile: Boolean, browser: String): mysqlResponse
+    setStats(won: Boolean, selectionlost: Boolean, timeoverlost: Boolean, correctanswers: Int, totalscore: Int, answerspeed: Float, gametimelength: Int, mouseoverevents: Int, mobile: Boolean, browser: String, city: String, region: String, country: String): mysqlResponse
   }
 
   type User {
@@ -131,6 +133,10 @@ export const root = {
       r[i].datetimeplayed = dateFormat;
     }
     return r;
+  },
+  userIP: async () => {
+    const userIPAddress = await publicIp.v4();
+    return userIPAddress;
   },
   // Auth --
   login: async (args) => {
