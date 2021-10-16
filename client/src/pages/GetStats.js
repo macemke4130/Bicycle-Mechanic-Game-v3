@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import { CenteredColContainer } from '../components/styles/SSOT.style';
 import { Table, TableHeader, TableRow, TableData } from '../components/styles/Stats.style';
@@ -9,6 +10,8 @@ import { gql } from '../utils/gql';
 const GetStats = () => {
     const [openGate, setOpenGate] = useState(true);
     const [allStats, setAllStats] = useState([]);
+
+    const history = useHistory();
 
     useEffect(() => {
         (async () => {
@@ -39,7 +42,7 @@ const GetStats = () => {
                 }
             }
         })();
-    }, [openGate]);
+    }, [openGate, history]);
 
     return (
         <CenteredColContainer>

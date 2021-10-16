@@ -1,9 +1,13 @@
 import { buildSchema } from 'graphql';
 import { query } from "./dbconnect.js";
+import * as jsonwebtoken from 'jsonwebtoken';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc.js';
 import timezone from 'dayjs/plugin/timezone.js';
 import publicIp from 'public-ip';
+
+import config from './config.js';
+const privateKey = config.keys.jwt;
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -18,8 +22,10 @@ export const schema = buildSchema(`
     highscores: [HighScore]
     partCount: Int
     getStats: [Stat]
-    login(user: String, password: String): String
+    login(user: String, password: String): UserObject
     userIP: String
+    jwt(user: String!, admin: Boolean!): JWT
+    auth(token: String!): AuthObject
   }
 
   type Mutation {
@@ -29,10 +35,25 @@ export const schema = buildSchema(`
     setStats(won: Boolean, selectionlost: Boolean, timeoverlost: Boolean, correctanswers: Int, totalscore: Int, answerspeed: Float, gametimelength: Int, mouseoverevents: Int, mobile: Boolean, browser: String, city: String, region: String, country: String): mysqlResponse
   }
 
+  type AuthObject {
+    valid: Boolean
+    user: String
+    admin: Boolean
+}
+
+  type JWT {
+    token: String
+  }
+
   type User {
     id: Int
     user: String
     password: String
+    admin: Boolean
+  }
+
+  type UserObject {
+    user: String
     admin: Boolean
   }
 
@@ -141,20 +162,64 @@ export const root = {
     const userIPAddress = await publicIp.v4();
     return userIPAddress;
   },
+  jwt: async (args) => {
+    // Create and returns JWT object--
+    const userObject = {
+      user: args.user,
+      admin: args.admin
+    };
+    console.log(userObject);
+    const token = await jsonwebtoken.default.sign({ data: userObject }, privateKey, { expiresIn: '1d' });
+    const jwtObject = {
+      token
+    };
+    return jwtObject;
+  },
+  auth: async (args) => {
+    // Creates and returns an authObject for the front end --
+    let authObject = {};
+    const token = args.token;
+    const auth = await jsonwebtoken.default.verify(token, privateKey, function (err, decoded) {
+      if (err) {
+        authObject = {
+          valid: false,
+          user: null,
+          admin: false
+        };
+      } else {
+        authObject = {
+          valid: true,
+          user: decoded.data.user,
+          admin: decoded.data.admin
+        };
+      }
+    });
+    return authObject;
+  },
   // Auth --
   login: async (args) => {
     const r = await query("select * from users where user = ?", [args.user]);
     const dbUser = r[0].user;
+    const dbAdmin = r[0].admin;
     const inputPassword = args.password;
     const dbPassword = r[0].password;
 
     if (inputPassword === dbPassword) {
-      return dbUser;
+      const userObject = {
+        user: dbUser,
+        admin: dbAdmin
+      }
+
+      return userObject;
     } else {
-      return null;
+      const nullObject = {
+        user: null,
+        admin: null
+      }
+      return nullObject;
     }
 
-    // return (inputPassword === dbPassword) ? r[0].user : null;
+    return (inputPassword === dbPassword) ? r[0].user : null;
   },
   // Mutations --
   updateHighScore: async (args) => {

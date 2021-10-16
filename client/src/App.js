@@ -9,6 +9,8 @@ import NewPart from './pages/NewPart';
 import GetStats from './pages/GetStats';
 import Login from './pages/Login';
 
+import PrivateRoute from './pages/PrivateRoute';
+
 function App() {
 	return (
 		<Router>
@@ -25,12 +27,12 @@ function App() {
 				<Route path="/about">
 					<About />
 				</Route>
-				<Route path="/newpart">
+				<PrivateRoute path="/newpart">
 					<NewPart />
-				</Route>
-				<Route path="/stats">
+				</PrivateRoute>
+				<PrivateRoute path="/stats">
 					<GetStats />
-				</Route>
+				</PrivateRoute>
 				<Route path="/login">
 					<Login />
 				</Route>
