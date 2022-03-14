@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { font } from './SSOT.style';
 
-const screenSize = "800px";
+const screenSize = "1025px";
 
 export const Button = styled.button`
     font-family: ${font};
@@ -40,7 +40,9 @@ export const PartImg = styled.img`
 
     @media (max-width: ${screenSize}) {
         height: 25vh;
-        width: fit-content;
+        width: 33vh;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
         align-self: center;
     }
 `;

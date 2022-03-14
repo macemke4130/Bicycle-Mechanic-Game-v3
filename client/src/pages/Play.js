@@ -305,7 +305,7 @@ const Play = () => {
                     city = r.city;
                     region = r.regionName;
                     country = r.country;
-                } catch(e) {
+                } catch (e) {
                     console.error(e);
                 }
 
@@ -326,7 +326,7 @@ const Play = () => {
                     region: "${region}",
                     country: "${country}"
                 ) { insertId } } `);
-                if (r) console.log("Try Again!");
+                    if (r) console.log("Try Again!");
                 } catch (e) {
                     console.error(e);
                 }
