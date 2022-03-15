@@ -12,7 +12,7 @@ const About = () => {
                 <Link to="/play" style={{ textDecoration: 'none' }}><NavLink>Play</NavLink></Link>
                 <Link to="/scoreboard" style={{ textDecoration: 'none' }}><NavLink>Scoreboard</NavLink></Link>
             </NavigationPanel>
-            <Para>This game was created by me <a href="http://www.lucasmace.com/" target="_blank">Lucas Mace</a>,
+            <Para>This game was created by me <a href="http://www.lucasmace.com/" target="_blank" rel="noreferrer">Lucas Mace</a>,
                 a bicycle nerd, for other bicycle nerds.</Para>
             <Para>I was a bicycle mechanic for over 10 years. In that time, my favorite game that
                 I used to played with my many co-workers had been handing them a small part and telling them to
