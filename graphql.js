@@ -151,7 +151,7 @@ export const root = {
     return r[0].parts;
   },
   getStats: async () => {
-    const r = await query("select * from stats order by id desc");
+    const r = await query("select * from stats order by id desc limit 250");
     for (let i = 0; i < r.length; i++) {
       const dateFormat = dayjs(r[i].datetimeplayed).tz("America/Chicago").format("MMM DD, YYYY h:mma");
       r[i].datetimeplayed = dateFormat;

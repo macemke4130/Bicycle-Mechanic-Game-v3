@@ -24,9 +24,13 @@ create table stats (
     datetimeplayed datetime default now()
 );
 
-alter table stats add column browser varchar(64) after mobile;
+alter table stats add column city varchar(64) after browser;
+alter table stats add column region varchar(64) after city;
+alter table stats add column country varchar(64) after region;
 
-select * from stats order by id desc;
+select * from stats where correctanswers > 10 order by id desc limit 250;
+
+select count(*) from stats where datetimeplayed > DATE_SUB(NOW(), INTERVAL 24 HOUR) AND datetimeplayed <= NOW();
 
 create table users (
 	id int primary key auto_increment not null,
