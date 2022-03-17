@@ -14,7 +14,7 @@ import Loading from '../components/Loading';
 
 import { Button, AnswerDiv, PartImg, PhotoContainer, Feedback, P } from '../components/styles/Play.style';
 import { YouAreWinner, YouAreLoser } from '../components/styles/ScoreBoard.style';
-import { HeadlineOne, CenteredColContainer } from '../components/styles/SSOT.style';
+import { HeadlineOne, CenteredColContainer, CreatedBy } from '../components/styles/SSOT.style';
 import { StartGameButton, StartGameButtonTitle } from '../components/styles/Home.style';
 import { NavigationPanel, NavLink } from '../components/styles/Nav.style';
 
@@ -401,6 +401,9 @@ const Play = () => {
                     {inTopTen && <InputHighScore submitHighScoreName={submitHighScoreName} setWinnerName={setWinnerName} />}
                 </CenteredColContainer>
                 {highScoreDisplay && <ScoreboardDisplay refeshHighScore={refeshHighScore} />}
+                <CenteredColContainer>
+                    <CreatedBy>Created by <a href="http://www.lucasmace.com/" target="_blank" rel="noreferrer">Lucas Mace</a></CreatedBy>
+                </CenteredColContainer>
             </>
         )
     }

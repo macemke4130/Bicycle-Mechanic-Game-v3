@@ -22,6 +22,7 @@ export const schema = buildSchema(`
     highscores: [HighScore]
     partCount: Int
     getStats: [Stat]
+    getPlaysLastHour: Int
     login(user: String, password: String): UserObject
     userIP: String
     jwt(user: String!, admin: Boolean!): JWT
@@ -157,6 +158,10 @@ export const root = {
       r[i].datetimeplayed = dateFormat;
     }
     return r;
+  },
+  getPlaysLastHour: async () => {
+    const r = await query("select count(*) as playedInLastHour from stats where datetimeplayed > DATE_SUB(NOW(), INTERVAL 1 HOUR) AND datetimeplayed <= NOW();");
+    return r[0].playedInLastHour;
   },
   userIP: async () => {
     const userIPAddress = await publicIp.v4();

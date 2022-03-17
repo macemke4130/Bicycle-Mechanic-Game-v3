@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { CenteredColContainer, CenteredRowContainer, HeadlineOne } from '../components/styles/SSOT.style';
+import { CenteredColContainer, CenteredRowContainer, HeadlineOne, CreatedBy } from '../components/styles/SSOT.style';
 import { HowToPlayList, ListItem, StartGameButton, StartGameButtonTitle } from '../components/styles/Home.style';
 import { PhotoContainer, PartImg } from '../components/styles/Play.style';
 import { NavLink } from '../components/styles/Nav.style';
@@ -16,6 +16,7 @@ const Home = () => {
     const [loading, setLoading] = useState(true);
     const [gateOpen, setGateOpen] = useState(true);
     const [partCount, setPartCount] = useState(null);
+    const [playsLastHour, setPlaysLastHour] = useState(null);
     const [photos, setPhotos] = useState([]);
 
     useEffect(() => {
@@ -49,6 +50,12 @@ const Home = () => {
     const getTotalParts = async () => {
         const r = await gql(` { partCount } `);
         setPartCount(r.partCount);
+        getPlaysInLastHour();
+    }
+
+    const getPlaysInLastHour = async () => {
+        const r = await gql(' { getPlaysLastHour }');
+        setPlaysLastHour(r.getPlaysLastHour);
     }
 
     if (loading) return <Loading />
@@ -61,6 +68,7 @@ const Home = () => {
                     <PartImg key={photo.id} src={photo.filename} alt="Part" />
                 ))}
             </PhotoContainer>
+            <CreatedBy>Created by <a href="http://www.lucasmace.com/" target="_blank" rel="noreferrer">Lucas Mace</a></CreatedBy>
             <HowToPlayList>
                 <ListItem>Choose the part from the supplied options based on the photos you see</ListItem>
                 <ListItem>You have 20 seconds to make your choice</ListItem>
@@ -70,8 +78,8 @@ const Home = () => {
                 <ListItem>An incorrect answer will end the game</ListItem>
                 <ListItem>Have fun and try to beat your friend's score!</ListItem>
                 {partCount && <ListItem>There are currently {partCount} parts in the game and I add more every week</ListItem>}
+                {playsLastHour && <ListItem>There have been {playsLastHour} games played in the last hour.</ListItem>}
             </HowToPlayList>
-            
             <CenteredRowContainer>
                 <Link to="/scoreboard" style={{ textDecoration: 'none' }}><NavLink>Scoreboard</NavLink></Link>
                 <Link to="/play" style={{ textDecoration: 'none' }}>

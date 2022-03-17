@@ -39,3 +39,13 @@ export const CenterPara = styled.p`
     width: 75%;
     text-align: center;
 `;
+
+export const CreatedBy = styled.p`
+    font-family: ${font};
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0.25em;
+    padding: 0.25em;
+    width: 75%;
+    text-align: center;
+`;
