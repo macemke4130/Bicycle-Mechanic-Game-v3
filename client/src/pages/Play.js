@@ -33,7 +33,7 @@ const Play = () => {
     const [index, setIndex] = useState(0);
     const [totalScore, setTotalScore] = useState(0);
     const [points, setPoints] = useState(500);
-    const [inTopTen, setInTopTen] = useState(false);
+    const [inTopTen, setInTopTen] = useState(false); // Top 50
     const [club100, setClub100] = useState(false);
     const [club100num, setClub100num] = useState(0);
     const [resetTimer, setResetTimer] = useState(false);
@@ -257,8 +257,8 @@ const Play = () => {
                 try {
                     const r = await gql(`{ highscores { totalscore } }`);
 
-                    if (r.highscores.length < 10) {
-                        // If there are fewer than 10 scores --
+                    if (r.highscores.length < 50) {
+                        // If there are fewer than 50 scores --
                         // and the score is greater than zero --
 
                         if (totalScore > 0) setInTopTen(true);
