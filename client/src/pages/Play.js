@@ -400,10 +400,10 @@ const Play = () => {
                     <HeadlineOne>Total Score: {totalScore.toLocaleString()}</HeadlineOne>
                     {inTopTen && <InputHighScore submitHighScoreName={submitHighScoreName} setWinnerName={setWinnerName} />}
                 </CenteredColContainer>
-                {highScoreDisplay && <ScoreboardDisplay refeshHighScore={refeshHighScore} />}
                 <CenteredColContainer>
                     <CreatedBy>Created by <a href="http://www.lucasmace.com/" target="_blank" rel="noreferrer">Lucas Mace</a></CreatedBy>
                 </CenteredColContainer>
+                {highScoreDisplay && <ScoreboardDisplay refeshHighScore={refeshHighScore} />}
             </>
         )
     }

@@ -78,7 +78,7 @@ const Home = () => {
                 <ListItem>An incorrect answer will end the game</ListItem>
                 <ListItem>Have fun and try to beat your friend's score!</ListItem>
                 {partCount && <ListItem>There are currently {partCount} parts in the game and I add more every week</ListItem>}
-                {playsLastHour && <ListItem>There have been {playsLastHour} games played in the last hour.</ListItem>}
+                {playsLastHour != 0 && <ListItem>There have been {playsLastHour} games played in the last hour.</ListItem>}
             </HowToPlayList>
             <CenteredRowContainer>
                 <Link to="/scoreboard" style={{ textDecoration: 'none' }}><NavLink>Scoreboard</NavLink></Link>

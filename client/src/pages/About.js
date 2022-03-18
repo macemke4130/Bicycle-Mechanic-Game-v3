@@ -35,6 +35,7 @@ const About = () => {
             <Para>If you enjoy the game, please share it with your bicycle nerd friends.</Para>
             <Para>This project is funded completely by myself and maintained in my spare time.</Para>
             <Para>- Lucas</Para>
+            <Para>"Name That Part is a fun, and surprisingly tough game..." - <a href="https://bikerumor.com/think-youre-a-knowledgeable-bike-mechanic-prove-it-with-name-that-part-game/" target="_blank">BikeRumor</a>.</Para>
 
         </CenteredColContainer>
     )

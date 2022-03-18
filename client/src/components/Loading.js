@@ -1,8 +1,10 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
 import Spinner from "../svg/spinner.svg";
 import { CenteredColContainer, HeadlineOne, CenterPara, CreatedBy } from './styles/SSOT.style';
 import { LoadingSpinner } from './styles/Loading.style';
+import { NavLink } from '../components/styles/Nav.style';
 
 const Loading = (props) => {
     return (
@@ -14,6 +16,9 @@ const Loading = (props) => {
             </CenteredColContainer>
             <CenteredColContainer>
                 <CreatedBy>Created by <a href="http://www.lucasmace.com/" target="_blank" rel="noreferrer">Lucas Mace</a></CreatedBy>
+            </CenteredColContainer>
+            <CenteredColContainer>
+                <Link to="/about" style={{ textDecoration: 'none' }}><NavLink>About</NavLink></Link>
             </CenteredColContainer>
         </>
     )
