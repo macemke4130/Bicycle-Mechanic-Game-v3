@@ -35,7 +35,9 @@ const About = () => {
             <Para>If you enjoy the game, please share it with your bicycle nerd friends.</Para>
             <Para>This project is funded completely by myself and maintained in my spare time.</Para>
             <Para>- Lucas</Para>
-            <Para>"Name That Part is a fun, and surprisingly tough game..." - <a href="https://bikerumor.com/think-youre-a-knowledgeable-bike-mechanic-prove-it-with-name-that-part-game/" target="_blank">BikeRumor</a>.</Para>
+            <Para>"Name That Part is a fun, and surprisingly tough game." - <a href="https://bikerumor.com/think-youre-a-knowledgeable-bike-mechanic-prove-it-with-name-that-part-game/" target="_blank">BikeRumor</a></Para>
+            <Para>"Challenging." - <a href="https://theradavist.com/2022/03/radar-roundup-reeb-full-suspension-sustainable-cambium-giro-flat-latch-engin-cranks-and-colored-xc-iii/" target="_blank">The Radavist</a></Para>
+            <Para>"This one is pure sadism." - <a href="https://www.pinkbike.com/news/slack-randoms-moto-inspired-hooligan-ebike-fixed-gear-skateboard-bikes-jet-engine-go-karts-and-more.html" target="_blank">PinkBike</a></Para>
 
         </CenteredColContainer>
     )
